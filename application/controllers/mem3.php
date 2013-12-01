@@ -46,7 +46,7 @@ class Mem3 extends CI_Controller {
             redirect('/main/restricted');
         }    
     }
-	
+	 
 	public function getTable(){
         $this->load->model('model_mem3');
         $this->load->model('model_users');
@@ -78,12 +78,28 @@ class Mem3 extends CI_Controller {
         $this->load->model('model_users');
         $t = $this->model_users->getType($this->session->userdata('username'));
         if ($this->session->userdata('is_logged_in') && $t == 3){
-			$u = $this->session->userdata('username');
-            $s = $this->model_mem3->getTodayUsage();
+			//$u = $this->session->userdata('username');
+            $t = $this->input->get('today');
+            $s = $this->model_mem3->getTodayUsage($t);
             echo "$s";
         } else {
             redirect('/main/restricted');
         }
     }
+    
+    public function getTodayLogTable(){
+		$this->load->model('model_mem3');
+        $this->load->model('model_users');
+        $t = $this->model_users->getType($this->session->userdata('username'));
+        if ($this->session->userdata('is_logged_in') && $t == 3){
+            $t = $this->input->get('today');
+            $u = $this->input->get('user');
+            $s = $this->model_mem3->getTodayUsage($t,$u);
+            echo "$s";
+        } else {
+            redirect('/main/restricted');
+        }
+    }
+    
 }
 
