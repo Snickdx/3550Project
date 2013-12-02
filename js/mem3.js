@@ -78,6 +78,8 @@
             },"json");
         });
 		
+		//this not working, need to fix on how to get the data from the drop down menu
+		//to filter our the options to create graphs and tables.
 		$(".IDmenu").change(function(){
 			console.log("fsfd");
 		});
