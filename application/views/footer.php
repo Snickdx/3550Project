@@ -6,6 +6,8 @@
         <script src="<?php echo base_url();?>js/vendor/bootstrap.min.js"></script>
         <script src="<?php echo base_url();?>js/main.js"></script>
         <script src="<?php echo base_url();?>js/mem4.js"></script>
+		<script src="<?php echo base_url();?>js/mem3.js"></script>
+		
     </body>
 </html>
 

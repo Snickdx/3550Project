@@ -46,5 +46,44 @@ class Mem3 extends CI_Controller {
             redirect('/main/restricted');
         }    
     }
+	
+	public function getTable(){
+        $this->load->model('model_mem3');
+        $this->load->model('model_users');
+        $t = $this->model_users->getType($this->session->userdata('username'));
+        if ($this->session->userdata('is_logged_in') && $t == 3){
+            $u = $this->session->userdata('username');
+            $s = $this->model_mem3->getSpecificId($u);
+            echo "$s";
+        } else {
+            redirect('/main/restricted');
+        }
+    }
+    
+    public function getLogTable(){
+        $this->load->model('model_mem3');
+        $this->load->model('model_users');
+        $t = $this->model_users->getType($this->session->userdata('username'));
+        if ($this->session->userdata('is_logged_in') && $t == 3){
+            $u = $this->session->userdata('username');
+            $s = $this->model_mem3->getSpecificUsage($u);
+            echo "$s";
+        } else {
+            redirect('/main/restricted');
+        }
+    }
+		
+	public function getDailyTable(){
+		$this->load->model('model_mem3');
+        $this->load->model('model_users');
+        $t = $this->model_users->getType($this->session->userdata('username'));
+        if ($this->session->userdata('is_logged_in') && $t == 3){
+			$u = $this->session->userdata('username');
+            $s = $this->model_mem3->getTodayUsage();
+            echo "$s";
+        } else {
+            redirect('/main/restricted');
+        }
+    }
 }
 

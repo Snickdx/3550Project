@@ -1,5 +1,5 @@
 <h1 class="text-center">Graphs and Tables</h1>
-<button id="grp4b1">User Info </button>
+<button id="grp4b1">Personal Info</button>
 <button id="grp4b2">Bar Graph</button>
 <button id="grp4b3">Log Table</button>
 <br><br><br>
