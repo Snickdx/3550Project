@@ -153,6 +153,8 @@
         });
 	
 		$("#view3b3").click(function(){
+			var content ="";
+			$("#view3d1").html(content);
 			var today= getTodaysDate();
 			$.get("/prjt/mem3/getDailyTable",{today:today},function(data){
 				console.log("dsd");
