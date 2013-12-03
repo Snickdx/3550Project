@@ -25,7 +25,7 @@
         });
         
         
-
+		
         $("#grp3b2").click(function(){
              $.get("/prjt/mem3/getLogTable",function(data) {
                 var i,time=[],date=[];
@@ -152,12 +152,12 @@
             },"json");
         });
 	
+		//code to display all log data after clicking the button
 		$("#view3b3").click(function(){
 			var content ="";
 			$("#view3d1").html(content);
 			var today= getTodaysDate();
 			$.get("/prjt/mem3/getDailyTable",{today:today},function(data){
-				console.log("dsd");
                 var i;
                 var content = "<h2 class='text-center'>Date Log: " + data[0].date + " </h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Username</th><th>Computer Id</th><th>Session Time(min)</th></tr></thead><tbody>";
                 for(i= 0; i < data.length; i++){
@@ -167,7 +167,149 @@
                 $("#view3d2").html(content);
             },"json");
 		
+			
 		});
+	
+		//load line chart for button 4
+		$("#view3b4").click(function(){
+			var today = getTodaysDate();
+			$.get("/prjt/mem3/getDailyTable",{today:today},function(data){
+				var i,k;var timesSeen = new Array();
+				var unSeen = true; var freq = new Array();
+				for(i=0;i<data.length;i++){
+					for(k=0;k<timesSeen.length;k++){
+						if(data[i].time === timesSeen[k]){
+							freq[k] = freq[k] +1;
+							unSeen = false;
+						}
+					}
+						if(unSeen === true){
+							freq[freq.length] = 1;
+							timesSeen[timesSeen.length] = data[i].time;
+						}
+						unSeen = true;
+				}
+				//sorts the timesSeen and the freq chart in ascending order
+				for(i=0;i<timesSeen.length;i++){
+					for(k=0;k<timesSeen.length;k++){
+						if(timesSeen[k] > timesSeen[i]){
+							var temp = timesSeen[k];
+							timesSeen[k] = timesSeen[i];
+							timesSeen[i] = temp;
+							var temp2 = freq[k];
+							freq[k] = freq[i];
+							freq[i] = temp2;
+						}
+					}
+				}
+				
+				$('#view3d2').highcharts({
+            title: {
+                text: 'Time Spent Logged In',
+                x: -20 //center
+            },
+            
+            xAxis: {
+				title:{
+					text:'Time'
+					},
+                categories: timesSeen
+            },
+            yAxis: {
+                title: {
+                    text: 'Frequency'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                valueSuffix: ''
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: [{
+                name: 'Usage Frequency',
+                data: freq
+            }]
+        });
+			
+			},"json");
+		});
+
+	
+		//load pie chart for button 5					
+		$("#view3b5").click(function(){
+			var today = getTodaysDate();
+            $.get("/prjt/mem3/getDailyTable",{today:today},function(data) {
+                
+				//need to calculate the actual data for pie chart
+				var i,j,k;var finalArrayData = new Array();
+				var unSeen = true;var pcsSeen = new Array();
+					for(i= 0; i < data.length; i++){
+					for(j=0;j<pcsSeen.length;j++){
+						if(data[i].comp_id === pcsSeen[j]){
+							unSeen = false;
+						}
+					}
+					if(unSeen === true){
+						pcsSeen[pcsSeen.length] = data[i].comp_id;
+					}
+					unSeen = true;
+				}
+				
+				for(k=0;k<pcsSeen.length;k++){
+					finalArrayData[k] = 0;
+					for(i=0;i<data.length;i++){
+						if(pcsSeen[k] === data[i].comp_id){
+							finalArrayData[k] = finalArrayData[k] + parseInt(data[i].time);
+						}
+					}
+				}
+				console.log(finalArrayData);
+				
+				
+				//loads pie chart
+				$("#view3d2").highcharts({
+				chart: {
+					plotBackgroundColor: null,
+					plotBorderWidth: null,
+					plotShadow: true
+				},
+				title: {
+					text: 'Usage of PCs  '
+				},
+				tooltip: {
+					pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+				},
+				plotOptions: {
+					pie: {
+						allowPointSelect: true,
+						cursor: 'pointer',
+						dataLabels: {
+							enabled: true,
+							color: '#000000',
+							connectorColor: '#000000',
+							format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+						}
+					}
+				},
+				series: [{
+					type: 'pie',
+					name: pcsSeen,
+					data: finalArrayData
+				}]
+				});					
+			},"json");
+		});
+		
+		
     });
 		
         
@@ -185,9 +327,6 @@
         
         return today;   
     }
-	
-	
-	
 	
 	
 }(this));
