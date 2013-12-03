@@ -87,6 +87,34 @@ class Mem3 extends CI_Controller {
         }
     }
     
+    public function getAllDailyTable(){
+		$this->load->model('model_mem3');
+        $this->load->model('model_users');
+        $t = $this->model_users->getType($this->session->userdata('username'));
+        if ($this->session->userdata('is_logged_in') && $t == 3){
+			//$u = $this->session->userdata('username');
+            $t = $this->input->get('today');
+            $s = $this->model_mem3->getAllTodayUsage($t);
+            echo "$s";
+        } else {
+            redirect('/main/restricted');
+        }
+    }
+    
+    public function getDailyCompTable(){
+		$this->load->model('model_mem3');
+        $this->load->model('model_users');
+        $t = $this->model_users->getType($this->session->userdata('username'));
+        if ($this->session->userdata('is_logged_in') && $t == 3){
+			//$u = $this->session->userdata('username');
+            $t = $this->input->get('today');
+            $s = $this->model_mem3->getTodayCompUsage($t);
+            echo "$s";
+        } else {
+            redirect('/main/restricted');
+        }
+    }
+    
     public function getTodayLogTable(){
 		$this->load->model('model_mem3');
         $this->load->model('model_users');
@@ -94,12 +122,39 @@ class Mem3 extends CI_Controller {
         if ($this->session->userdata('is_logged_in') && $t == 3){
             $t = $this->input->get('today');
             $u = $this->input->get('user');
-            $s = $this->model_mem3->getTodayUsage($t,$u);
+            $s = $this->model_mem3->getTodayLogTable($t,$u);
             echo "$s";
         } else {
             redirect('/main/restricted');
         }
     }
     
+    public function getTodayCompLogTable(){
+		$this->load->model('model_mem3');
+        $this->load->model('model_users');
+        $t = $this->model_users->getType($this->session->userdata('username'));
+        if ($this->session->userdata('is_logged_in') && $t == 3){
+            $t = $this->input->get('today');
+            $c = $this->input->get('comp');
+            $s = $this->model_mem3->getTodayCompLogTable($t,$c);
+            echo "$s";
+        } else {
+            redirect('/main/restricted');
+        }
+    }
+    
+    public function getDailyGraph(){
+		$this->load->model('model_mem3');
+        $this->load->model('model_users');
+        $t = $this->model_users->getType($this->session->userdata('username'));
+        if ($this->session->userdata('is_logged_in') && $t == 3){
+			//$u = $this->session->userdata('username');
+            $t = $this->input->get('today');
+            $s = $this->model_mem3->getTodayGraph($t);
+            echo "$s";
+        } else {
+            redirect('/main/restricted');
+        }
+    }
 }
 

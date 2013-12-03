@@ -66,21 +66,11 @@
 			$("#view3d2").html(content);
             var today = getTodaysDate();
             $.get("/prjt/mem3/getDailyTable",{today:today},function(data){
-                var i;var unSeen = true;
-				var usersSeen = new Array();
+                var i;
+                arr = orderList(data,"username");
                 var MenuContent = "<select id='sel' class='IDmenu'><option selected ='selected' value ='nothing'>Choose ID</option>";
-                for(i= 0; i < data.length; i++){
-					for(j=0;j<usersSeen.length;j++){
-						if(data[i].username === usersSeen[j]){
-							unSeen = false;
-						}
-					}
-					if(unSeen === true){
-						usersSeen[usersSeen.length] = data[i].username;
-						MenuContent += '<option id ='+data[i].username+' value="'+data[i].username+'">' + data[i].username  + "</option>";	
-					}
-					unSeen = true;
-					console.log(i,usersSeen.length,unSeen,usersSeen);
+                for(i= 0; i < data.length; i++){	
+						MenuContent += '<option id ='+arr[i]+' value="'+arr[i]+'">' + arr[i]  + "</option>";	
 				}
                 MenuContent += "</select>";
                 $("#view3d1").html(MenuContent); 
@@ -91,7 +81,6 @@
 		$(document).on("change","#sel",function(){
             var user = $(this).val();
             var today = getTodaysDate();
-			console.log("sdsd");
             $.get("/prjt/mem3/getTodayLogTable",{user:user,today:today},function(data){
                 var i;
                 var content = "<h2 class='text-center'>Student " + user + " Log for "+ today +"</h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Date</th><th>Computer ID</th><th>Session Time(min)</th></tr></thead><tbody>";
@@ -110,8 +99,7 @@
 		$(document).on("change","#selComp",function(){
             var comp = $(this).val();
             var today = getTodaysDate();
-			console.log("sdsd");
-            $.get("/prjt/mem3/getTodayLogTable",{user:comp,today:today},function(data){
+            $.get("/prjt/mem3/getTodayCompLogTable",{comp:comp,today:today},function(data){
                 var i;
                 var content = "<h2 class='text-center'>Computer " + comp + " Log for "+ today +"</h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Date</th><th>User logged in</th><th>Session Time(min)</th></tr></thead><tbody>";
                 for(i= 0; i < data.length; i++){
@@ -130,25 +118,15 @@
 			var content = "";
 			$("#view3d2").html(content);
             var today = getTodaysDate();
-            $.get("/prjt/mem3/getDailyTable",{today:today},function(data){
-                var i;var unSeen = true;
-				var pcsSeen = new Array();
+            $.get("/prjt/mem3/getDailyCompTable",{today:today},function(data){
+                var i,arr = [];
+                arr = orderList(data,"comp_id");
                 var MenuContent = "<select id='selComp' class='IDmenu'><option selected ='selected' value ='nothing'>Choose ID</option>";
                 for(i= 0; i < data.length; i++){
-					for(j=0;j<pcsSeen.length;j++){
-						if(data[i].comp_id === pcsSeen[j]){
-							unSeen = false;
-						}
-					}
-					if(unSeen === true){
-						pcsSeen[pcsSeen.length] = data[i].comp_id;
-						MenuContent += '<option id ='+data[i].comp_id+' value="'+data[i].comp_id+'">' + data[i].comp_id  + "</option>";	
-					}
-					unSeen = true;
-					
+						MenuContent += '<option id ='+arr[i]+' value="'+arr[i]+'">' + arr[i]  + "</option>";	
 				}
                 MenuContent += "</select>";
-                $("#view3d1").html(MenuContent); 
+                $("#view3d1").html(MenuContent);
             },"json");
         });
 	
@@ -157,7 +135,7 @@
 			var content ="";
 			$("#view3d1").html(content);
 			var today= getTodaysDate();
-			$.get("/prjt/mem3/getDailyTable",{today:today},function(data){
+			$.get("/prjt/mem3/getAllDailyTable",{today:today},function(data){
                 var i;
                 var content = "<h2 class='text-center'>Date Log: " + data[0].date + " </h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Username</th><th>Computer Id</th><th>Session Time(min)</th></tr></thead><tbody>";
                 for(i= 0; i < data.length; i++){
@@ -170,12 +148,13 @@
 			
 		});
 	
+        
 		//load line chart for button 4
 		$("#view3b4").click(function(){
 			var today = getTodaysDate();
-			$.get("/prjt/mem3/getDailyTable",{today:today},function(data){
-				var i,k;var timesSeen = new Array();
-				var unSeen = true; var freq = new Array();
+			$.get("/prjt/mem3/getDailyGraph",{today:today},function(data){
+				var i,k;var timesSeen = [];
+				var unSeen = true; var freq = [];
 				for(i=0;i<data.length;i++){
 					for(k=0;k<timesSeen.length;k++){
 						if(data[i].time === timesSeen[k]){
@@ -190,9 +169,10 @@
 						unSeen = true;
 				}
 				//sorts the timesSeen and the freq chart in ascending order
+                
 				for(i=0;i<timesSeen.length;i++){
 					for(k=0;k<timesSeen.length;k++){
-						if(timesSeen[k] > timesSeen[i]){
+						if(parseInt(timesSeen[k]) > parseInt(timesSeen[i])){
 							var temp = timesSeen[k];
 							timesSeen[k] = timesSeen[i];
 							timesSeen[i] = temp;
@@ -202,7 +182,7 @@
 						}
 					}
 				}
-				
+				//console.log(typeof(timesSeen[0]));
 				$('#view3d2').highcharts({
             title: {
                 text: 'Time Spent Logged In',
@@ -247,66 +227,64 @@
 		//load pie chart for button 5					
 		$("#view3b5").click(function(){
 			var today = getTodaysDate();
-            $.get("/prjt/mem3/getDailyTable",{today:today},function(data) {
+            $.get("/prjt/mem3/getDailyGraph",{today:today},function(data) {
                 
 				//need to calculate the actual data for pie chart
-				var i,j,k;var finalArrayData = new Array();
-				var unSeen = true;var pcsSeen = new Array();
+				var i,j,k;var finalArrayData = [];
+				var unSeen = true;var pcsSeen = [];
 					for(i= 0; i < data.length; i++){
-					for(j=0;j<pcsSeen.length;j++){
-						if(data[i].comp_id === pcsSeen[j]){
-							unSeen = false;
-						}
-					}
-					if(unSeen === true){
-						pcsSeen[pcsSeen.length] = data[i].comp_id;
-					}
-					unSeen = true;
-				}
-				
+                        for(j=0;j<pcsSeen.length;j++){
+                            if(data[i].comp_id === pcsSeen[j]){
+                                unSeen = false;
+                            }
+                        }
+                        if(unSeen === true){
+                            pcsSeen[pcsSeen.length] = data[i].comp_id;
+                        }
+                        unSeen = true;
+				    }
+
 				for(k=0;k<pcsSeen.length;k++){
-					finalArrayData[k] = 0;
-					for(i=0;i<data.length;i++){
-						if(pcsSeen[k] === data[i].comp_id){
-							finalArrayData[k] = finalArrayData[k] + parseInt(data[i].time);
-						}
-					}
-				}
+                    var temp=[],sum;
+                    sum = getSum(data,pcsSeen[k]);
+                    temp.push("ID: "+data[k].username,sum);
+                    finalArrayData[k] = temp;
+                }
+				
 				console.log(finalArrayData);
-				
-				
 				//loads pie chart
 				$("#view3d2").highcharts({
-				chart: {
-					plotBackgroundColor: null,
-					plotBorderWidth: null,
-					plotShadow: true
-				},
-				title: {
-					text: 'Usage of PCs  '
-				},
-				tooltip: {
-					pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-				},
-				plotOptions: {
-					pie: {
-						allowPointSelect: true,
-						cursor: 'pointer',
-						dataLabels: {
-							enabled: true,
-							color: '#000000',
-							connectorColor: '#000000',
-							format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-						}
-					}
-				},
-				series: [{
-					type: 'pie',
-					name: pcsSeen,
-					data: finalArrayData
-				}]
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: true
+                    },
+                    title: {
+                        text: 'Usage of PCs  '
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: true,
+                                color: '#000000',
+                                connectorColor: '#000000',
+                                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                            }
+                        }
+                    },
+                    series: [{
+                        type: 'pie',
+                        name: pcsSeen,
+                        data: finalArrayData
+                    }]
 				});					
 			},"json");
+            
 		});
 		
 		
@@ -326,6 +304,25 @@
         today = dd+'-'+mm+'-'+yyyy;
         
         return today;   
+    }
+    
+    function orderList(d,str){
+        var arr = [],i;
+        for(i=0;i<d.length;i++)
+            arr[i] = d[i][str];
+        arr.sort();
+        
+        return arr;
+    }
+        
+    function getSum(data,key){
+        var sum=0,i;
+        for(i=0;i<data.length;i++){
+            if(key === data[i].comp_id){
+                sum = sum +  parseInt(data[i].time);
+            }
+        }
+        return sum;
     }
 	
 	
