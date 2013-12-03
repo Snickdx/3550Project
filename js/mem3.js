@@ -80,7 +80,6 @@
 						MenuContent += '<option id ='+data[i].username+' value="'+data[i].username+'">' + data[i].username  + "</option>";	
 					}
 					unSeen = true;
-					console.log(i,usersSeen.length,unSeen,usersSeen);
 				}
                 MenuContent += "</select>";
                 $("#view3d1").html(MenuContent); 
@@ -91,7 +90,6 @@
 		$(document).on("change","#sel",function(){
             var user = $(this).val();
             var today = getTodaysDate();
-			console.log("sdsd");
             $.get("/prjt/mem3/getTodayLogTable",{user:user,today:today},function(data){
                 var i;
                 var content = "<h2 class='text-center'>Student " + user + " Log for "+ today +"</h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Date</th><th>Computer ID</th><th>Session Time(min)</th></tr></thead><tbody>";
@@ -110,7 +108,7 @@
 		$(document).on("change","#selComp",function(){
             var comp = $(this).val();
             var today = getTodaysDate();
-			console.log("sdsd");
+			
             $.get("/prjt/mem3/getTodayLogTable",{user:comp,today:today},function(data){
                 var i;
                 var content = "<h2 class='text-center'>Computer " + comp + " Log for "+ today +"</h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Date</th><th>User logged in</th><th>Session Time(min)</th></tr></thead><tbody>";
@@ -272,7 +270,7 @@
 						}
 					}
 				}
-				console.log(finalArrayData);
+				
 				
 				
 				//loads pie chart
