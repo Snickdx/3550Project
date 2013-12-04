@@ -1,79 +1,20 @@
 (function(window){
     $(document).ready(function(){
-        
-        //jquery get for the User Info Button
-        $("#grp3b1").click(function(){
-            $.get("/prjt/mem3/getTable",function(data){
-                var content = "<h2 class='text-center'>Supervisor " + data.username + " Information</h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Id</th><th>Username(Student Id)</th><th>User Type</th></tr></thead><tbody>";
-                content += '<tr><td>' + data.id  + '</td>' + '<td>' + data.username  + '</td>' + '<td>' + data.type + '</td></tr>';
-                content += "</tbody></table>";
-                $("#grp3d1").html(content); 
-            },"json");
-        });
-        
-        //jquery get for the Log Table Button
-        $("#grp3b3").click(function(){
-            $.get("/prjt/mem3/getLogTable",function(data){
-                var i;
-                var content = "<h2 class='text-center'>Supervisor " + data[0].username + " Log</h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Date</th><th>Computer Id</th><th>Session Time(min)</th></tr></thead><tbody>";
-                for(i= 0; i < data.length; i++){
-                    content += '<tr><td>' + data[i].date  + '</td>' + '<td>' + data[i].comp_id  + '</td>' + '<td>' + data[i].time + '</td></tr>';
-                }
-                content += "</tbody></table>";
-                $("#grp3d1").html(content);
-            },"json");
-        });
-        
-        
-		
-        $("#grp3b2").click(function(){
-             $.get("/prjt/mem3/getLogTable",function(data) {
-                var i,time=[],date=[];
-                for(i = 0; i < data.length; i++){
-                    time.push(parseInt(data[i].time));
-                    date.push(data[i].date);
-                }
-                 
-                $('#grp3d1').highcharts({
-                    
-                    chart: {
-                        type: 'bar',
-                        borderWidth: 2
-                    },
-                    title: {
-                        text: 'Date vs Time(length of usage)'
-                    },
-                    xAxis: {
-                        categories: date
-                    },
-                    yAxis: {
-                        title: {
-                            text: 'Time'
-                        }
-                    },
-                    series: [{
-                        name: 'Time',
-                        data: time
-                    }]
-                });
-            
-            },"json");
-        });
          
 	//dynmically load student ids in options menu
-		$("#view3b1").click(function(){
-			var content = "";
-			$("#view3d2").html(content);
+		$("#viewb1").click(function(){
+			var MenuContent = "";
+			$("#viewd2").html(MenuContent);
             var today = getTodaysDate();
             $.get("/prjt/mem3/getDailyTable",{today:today},function(data){
                 var i;
                 arr = orderList(data,"username");
-                var MenuContent = "<select id='sel' class='IDmenu'><option selected ='selected' value ='nothing'>Choose ID</option>";
+                 MenuContent = "<select id='sel' class='IDmenu'><option selected ='selected' value ='nothing'>Choose ID</option>";
                 for(i= 0; i < data.length; i++){	
 						MenuContent += '<option id ='+arr[i]+' value="'+arr[i]+'">' + arr[i]  + "</option>";	
 				}
                 MenuContent += "</select>";
-                $("#view3d1").html(MenuContent); 
+                $("#viewd1").html(MenuContent); 
             },"json");
         });
 		
@@ -90,7 +31,7 @@
 					}
 				}
                 content += "</tbody></table>";
-                $("#view3d2").html(content);
+                $("#viewd2").html(content);
             },"json");
 		});
 		
@@ -108,15 +49,15 @@
 					}
 				}
                 content += "</tbody></table>";
-                $("#view3d2").html(content);
+                $("#viewd2").html(content);
             },"json");
 		});
     
  
 	//dynamically loading the computer IDs for the "select a computer" button
-	$("#view3b2").click(function(){
+	$("#viewb2").click(function(){
 			var content = "";
-			$("#view3d2").html(content);
+			$("#viewd2").html(content);
             var today = getTodaysDate();
             $.get("/prjt/mem3/getDailyCompTable",{today:today},function(data){
                 var i,arr = [];
@@ -126,14 +67,14 @@
 						MenuContent += '<option id ='+arr[i]+' value="'+arr[i]+'">' + arr[i]  + "</option>";	
 				}
                 MenuContent += "</select>";
-                $("#view3d1").html(MenuContent);
+                $("#viewd1").html(MenuContent);
             },"json");
         });
 	
 		//code to display all log data after clicking the button
-		$("#view3b3").click(function(){
+		$("#viewb3").click(function(){
 			var content ="";
-			$("#view3d1").html(content);
+			$("#viewd1").html(content);
 			var today= getTodaysDate();
 			$.get("/prjt/mem3/getAllDailyTable",{today:today},function(data){
                 var i;
@@ -142,7 +83,7 @@
                     content += '<tr><td>' + data[i].username + '</td>' + '<td>' + data[i].comp_id  + '</td>' + '<td>' + data[i].time + '</td></tr>';
                 }
                 content += "</tbody></table>";
-                $("#view3d2").html(content);
+                $("#viewd2").html(content);
             },"json");
 		
 			
@@ -150,7 +91,7 @@
 	
         
 		//load line chart for button 4
-		$("#view3b4").click(function(){
+		$("#viewb4").click(function(){
 			var today = getTodaysDate();
 			$.get("/prjt/mem3/getDailyGraph",{today:today},function(data){
 				var i,k;var timesSeen = [];
@@ -183,7 +124,7 @@
 					}
 				}
 				//console.log(typeof(timesSeen[0]));
-				$('#view3d2').highcharts({
+				$('#viewd2').highcharts({
             title: {
                 text: 'Time Spent Logged In',
                 x: -20 //center
@@ -225,7 +166,7 @@
 
 	
 		//load pie chart for button 5					
-		$("#view3b5").click(function(){
+		$("#viewb5").click(function(){
 			var today = getTodaysDate();
             $.get("/prjt/mem3/getDailyGraph",{today:today},function(data) {
                 
@@ -247,13 +188,13 @@
 				for(k=0;k<pcsSeen.length;k++){
                     var temp=[],sum;
                     sum = getSum(data,pcsSeen[k]);
-                    temp.push("ID: "+data[k].username,sum);
+                    temp.push("comp ID: "+pcsSeen[k],sum);
                     finalArrayData[k] = temp;
                 }
 				
 				console.log(finalArrayData);
 				//loads pie chart
-				$("#view3d2").highcharts({
+				$("#viewd2").highcharts({
                     chart: {
                         plotBackgroundColor: null,
                         plotBorderWidth: null,

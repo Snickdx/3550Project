@@ -58,5 +58,81 @@ class Mem2 extends CI_Controller {
             redirect('/main/restricted');
         }    
     }
+	
+	public function getUniqueDateLogs(){
+		$this->load->model('model_mem2');
+		$this->load->model('model_users');
+		$t = $this->model_users->getType($this->session->userdata('username'));
+		if ($this->session->userdata('is_logged_in') && $t <= 2){
+			$s = $this->model_mem2->getUniqueDateLogtable();
+			echo "$s";
+        } else {
+            redirect('/main/restricted');
+        }
+	}
+	
+	public function getDateLogTable(){
+		$this->load->model('model_mem2');
+		$this->load->model('model_users');
+		$t = $this->model_users->getType($this->session->userdata('username'));
+        if ($this->session->userdata('is_logged_in') && $t <= 2){
+            $t = $this->input->get('dateS');
+            $s = $this->model_mem2->getDateLogs($t);
+            echo "$s";
+        } else {
+            redirect('/main/restricted');
+        }
+    }
+	
+	public function getUniqueIdLogs(){
+		$this->load->model('model_mem2');
+		$this->load->model('model_users');
+		$t = $this->model_users->getType($this->session->userdata('username'));
+        if ($this->session->userdata('is_logged_in') && $t <= 2){
+            $s = $this->model_mem2->getUniqueIdLogTable();
+            echo "$s";
+        } else {
+            redirect('/main/restricted');
+        }
+    }
+	
+	public function getIdLogTable(){
+		$this->load->model('model_mem2');
+		$this->load->model('model_users');
+		$t = $this->model_users->getType($this->session->userdata('username'));
+        if ($this->session->userdata('is_logged_in') && $t <= 2){
+            $t = $this->input->get('user');
+            $s = $this->model_mem2->getIdLogs($t);
+            echo "$s";
+        } else {
+            redirect('/main/restricted');
+        }
+    }
+	
+	public function getUniqueCompLogs(){
+		$this->load->model('model_mem2');
+		$this->load->model('model_users');
+		$t = $this->model_users->getType($this->session->userdata('username'));
+        if ($this->session->userdata('is_logged_in') && $t <= 2){
+            $s = $this->model_mem2->getUniqueCompLogTable();
+            echo "$s";
+        } else {
+            redirect('/main/restricted');
+        }
+    }
+	
+	public function getCompLogTable(){
+		$this->load->model('model_mem2');
+		$this->load->model('model_users');
+		$t = $this->model_users->getType($this->session->userdata('username'));
+        if ($this->session->userdata('is_logged_in') && $t <= 2){
+            $t = $this->input->get('comp_id');
+            $s = $this->model_mem2->getCompLogs($t);
+            echo "$s";
+        } else {
+            redirect('/main/restricted');
+        }
+    }
+		
 }
 

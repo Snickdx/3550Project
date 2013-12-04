@@ -1,11 +1,11 @@
 <h1 class="text-center">Graphs and Tables</h1>
-<button id="grp4b1">Personal Info</button>
-<button id="grp4b2">Bar Graph</button>
-<button id="grp4b3">Log Table</button>
+<button id="pInfo">Personal Info</button>
+<button id="pBargraph">Bar Graph</button>
+<button id="pLogTable">Log Table</button>
 <br><br><br>
 <div class="row">
     <div class="col-md-2"></div>
-    <div id="grp4d1" class="col-md-8"></div>
+    <div id="dispInfo" class="col-md-8"></div>
     <div class="col-md-2"></div>
 </div>
 <br>
