@@ -1,10 +1,10 @@
 <h1>Members 2 (Manager)Page</h1>
 <div id="row">
-    <a href='<?php echo base_url()."mem2/graphs2" ?>'>Personal Info</a>
+    <a href='<?php echo base_url()."mem2/graphs2" ?>'>Graphs</a>
     <br>
-    <a href='<?php echo base_url()."mem2/viewInfo2" ?>'>View Usage Info</a>
+    <a href='<?php echo base_url()."mem2/viewInfo2" ?>'>View Info</a>
     <br>
-    <a href='<?php echo base_url()."mem2/log" ?>'>View Log Info</a>
+    <a href='<?php echo base_url()."mem2/log" ?>'>Log</a>
     <br>
 </div>
 

@@ -16,6 +16,29 @@ class Model_users extends CI_Model{
         }
     }
     
+    public function setLog($u,$d){
+        $start = convertDateToString($d);
+        $data = array(
+            'username' => $u,
+            'start' => $start
+        );
+        
+        $this->db->insert('log', $data); 
+    }
+    
+     public function endLog($u,$d){
+        $start = convertDateToString($d); 
+        $end = convertDateToString(getdate());
+        $data = array(
+               'end' => $end
+            );
+
+        $this->db->where('username', $u);
+        $this->db->where('start', $start);
+        $this->db->update('log', $data); 
+    }
+    
+    
     public function getType($username){
 
         $this->db->where('username',$username);
@@ -60,4 +83,17 @@ class Model_users extends CI_Model{
         }
         //return $query;
     }
+
 }
+
+function convertDateToString($d){
+        $date_array = $d;
+        $formated_date = "";
+        $formated_date .= $date_array['mday'] . "/";
+        $formated_date .= $date_array['mon'] . "/";
+        $formated_date .= $date_array['year'] . "-";
+        $formated_date .= $date_array['hours'] . ":";
+        $formated_date .= $date_array['minutes'] . ":";
+        $formated_date .= $date_array['seconds'];
+        return $formated_date;
+    }

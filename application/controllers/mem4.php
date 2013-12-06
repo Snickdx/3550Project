@@ -32,7 +32,7 @@ class Mem4 extends CI_Controller {
         $this->load->model('model_mem4');
         $this->load->model('model_users');
         $t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t == 4){
+        if ($this->session->userdata('is_logged_in') && $t <= 4){
             $u = $this->session->userdata('username');
             $s = $this->model_mem4->getSpecificId($u);
             echo "$s";
@@ -45,7 +45,7 @@ class Mem4 extends CI_Controller {
         $this->load->model('model_mem4');
         $this->load->model('model_users');
         $t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t == 4){
+        if ($this->session->userdata('is_logged_in') && $t <= 4){
             $u = $this->session->userdata('username');
             $s = $this->model_mem4->getSpecificUsage($u);
             echo "$s";

@@ -1,7 +1,7 @@
-<h1>Supervisor Info</h1>
-<button id="p3Info">Personal Info</button>
-<button id="p3Bargraph">Bar Graph</button>
-<button id="p3LogTable">Log Table</button>
+<h1>Graphs page for Supervisor</h1>
+<button id="pInfo">Personal Info</button>
+<button id="pBargraph">Bar Graph</button>
+<button id="pLogTable">Log Table</button>
 <br><br><br>
 <div class="row">
     <div class="col-md-2"></div>
