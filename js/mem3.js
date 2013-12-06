@@ -2,9 +2,9 @@
     $(document).ready(function(){
          
 	//dynmically load student ids in options menu
-		$("#viewb1").click(function(){
+		$("#view3b1").click(function(){
 			var MenuContent = "";
-			$("#viewd2").html(MenuContent);
+			$("#view3d2").html(MenuContent);
             var today = getTodaysDate();
             $.get("/prjt/mem3/getDailyTable",{today:today},function(data){
                 var i;
@@ -14,7 +14,7 @@
 						MenuContent += '<option id ='+arr[i]+' value="'+arr[i]+'">' + arr[i]  + "</option>";	
 				}
                 MenuContent += "</select>";
-                $("#viewd1").html(MenuContent); 
+                $("#view3d1").html(MenuContent); 
             },"json");
         });
 		
@@ -31,7 +31,7 @@
 					}
 				}
                 content += "</tbody></table>";
-                $("#viewd2").html(content);
+                $("#view3d2").html(content);
             },"json");
 		});
 		
@@ -49,15 +49,15 @@
 					}
 				}
                 content += "</tbody></table>";
-                $("#viewd2").html(content);
+                $("#view3d2").html(content);
             },"json");
 		});
     
  
 	//dynamically loading the computer IDs for the "select a computer" button
-	$("#viewb2").click(function(){
+	$("#view3b2").click(function(){
 			var content = "";
-			$("#viewd2").html(content);
+			$("#view3d2").html(content);
             var today = getTodaysDate();
             $.get("/prjt/mem3/getDailyCompTable",{today:today},function(data){
                 var i,arr = [];
@@ -67,14 +67,14 @@
 						MenuContent += '<option id ='+arr[i]+' value="'+arr[i]+'">' + arr[i]  + "</option>";	
 				}
                 MenuContent += "</select>";
-                $("#viewd1").html(MenuContent);
+                $("#view3d1").html(MenuContent);
             },"json");
         });
 	
 		//code to display all log data after clicking the button
-		$("#viewb3").click(function(){
+		$("#view3b3").click(function(){
 			var content ="";
-			$("#viewd1").html(content);
+			$("#view3d1").html(content);
 			var today= getTodaysDate();
 			$.get("/prjt/mem3/getAllDailyTable",{today:today},function(data){
                 var i;
@@ -83,7 +83,7 @@
                     content += '<tr><td>' + data[i].username + '</td>' + '<td>' + data[i].comp_id  + '</td>' + '<td>' + data[i].time + '</td></tr>';
                 }
                 content += "</tbody></table>";
-                $("#viewd2").html(content);
+                $("#view3d2").html(content);
             },"json");
 		
 			
@@ -91,7 +91,7 @@
 	
         
 		//load line chart for button 4
-		$("#viewb4").click(function(){
+		$("#view3b4").click(function(){
 			var today = getTodaysDate();
 			$.get("/prjt/mem3/getDailyGraph",{today:today},function(data){
 				var i,k;var timesSeen = [];
@@ -124,7 +124,7 @@
 					}
 				}
 				//console.log(typeof(timesSeen[0]));
-				$('#viewd2').highcharts({
+				$('#view3d2').highcharts({
             title: {
                 text: 'Time Spent Logged In',
                 x: -20 //center
@@ -166,7 +166,7 @@
 
 	
 		//load pie chart for button 5					
-		$("#viewb5").click(function(){
+		$("#view3b5").click(function(){
 			var today = getTodaysDate();
             $.get("/prjt/mem3/getDailyGraph",{today:today},function(data) {
                 
@@ -192,9 +192,9 @@
                     finalArrayData[k] = temp;
                 }
 				
-				console.log(finalArrayData);
+				
 				//loads pie chart
-				$("#viewd2").highcharts({
+				$("#view3d2").highcharts({
                     chart: {
                         plotBackgroundColor: null,
                         plotBorderWidth: null,
@@ -227,6 +227,62 @@
 			},"json");
             
 		});
+		
+		$("#p3Info").click(function(){
+            $.get("/prjt/mem3/getTable",function(data){
+                var content = "<h2 class='text-center'>Student " + data.username + " Information</h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Id</th><th>Username(Student Id)</th><th>User Type</th></tr></thead><tbody>";
+                content += '<tr><td>' + data.id  + '</td>' + '<td>' + data.username  + '</td>' + '<td>' + data.type + '</td></tr>';
+                content += "</tbody></table>";
+                $("#dispInfo").html(content); 
+            },"json");
+        });
+        
+        //jquery get for the Log Table Button
+        $("#p3LogTable").click(function(){
+            $.get("/prjt/mem3/getLogTable",function(data){
+                var i;
+                var content = "<h2 class='text-center'>Student " + data[0].username + " Log</h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Date</th><th>Computer Id</th><th>Session Time(min)</th></tr></thead><tbody>";
+                for(i= 0; i < data.length; i++){
+                    content += '<tr><td>' + data[i].date  + '</td>' + '<td>' + data[i].comp_id  + '</td>' + '<td>' + data[i].time + '</td></tr>';
+                }
+                content += "</tbody></table>";
+                $("#dispInfo").html(content); 
+            },"json");
+        });
+        
+        $("#p3Bargraph").click(function(){
+             $.get("/prjt/mem3/getLogTable",function(data) {
+                var i,time=[],date=[];
+                for(i = 0; i < data.length; i++){
+                    time.push(parseInt(data[i].time));
+                    date.push(data[i].date);
+                }
+                 
+                $('#dispInfo').highcharts({
+                    
+                    chart: {
+                        type: 'bar',
+                        borderWidth: 2
+                    },
+                    title: {
+                        text: 'Date vs Time(length of usage)'
+                    },
+                    xAxis: {
+                        categories: date
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Time'
+                        }
+                    },
+                    series: [{
+                        name: 'Time',
+                        data: time
+                    }]
+                });
+            
+            },"json");
+        });
 		
 		
     });
