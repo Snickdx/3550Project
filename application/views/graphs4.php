@@ -1,7 +1,7 @@
 <h1 class="text-center">Graphs and Tables</h1>
-<button id="pInfo">Personal Info</button>
-<button id="pBargraph">Bar Graph</button>
-<button id="pLogTable">Log Table</button>
+<button id="p4Info">Personal Info</button>
+<button id="p4Bargraph">Bar Graph</button>
+<button id="p4LogTable">Log Table</button>
 <br><br><br>
 <div class="row">
     <div class="col-md-2"></div>

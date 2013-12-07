@@ -63,7 +63,7 @@ class Mem2 extends CI_Controller {
 		$this->load->model('model_mem2');
 		$this->load->model('model_users');
 		$t = $this->model_users->getType($this->session->userdata('username'));
-		if ($this->session->userdata('is_logged_in') && $t <= 2){
+		if ($this->session->userdata('is_logged_in') && $t == 2){
 			$s = $this->model_mem2->getUniqueDateLogtable();
 			echo "$s";
         } else {
@@ -75,7 +75,7 @@ class Mem2 extends CI_Controller {
 		$this->load->model('model_mem2');
 		$this->load->model('model_users');
 		$t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t <= 2){
+        if ($this->session->userdata('is_logged_in') && $t == 2){
             $t = $this->input->get('dateS');
             $s = $this->model_mem2->getDateLogs($t);
             echo "$s";
@@ -88,7 +88,7 @@ class Mem2 extends CI_Controller {
 		$this->load->model('model_mem2');
 		$this->load->model('model_users');
 		$t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t <= 2){
+        if ($this->session->userdata('is_logged_in') && $t == 2){
             $s = $this->model_mem2->getUniqueIdLogTable();
             echo "$s";
         } else {
@@ -100,7 +100,7 @@ class Mem2 extends CI_Controller {
 		$this->load->model('model_mem2');
 		$this->load->model('model_users');
 		$t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t <= 2){
+        if ($this->session->userdata('is_logged_in') && $t == 2){
             $t = $this->input->get('user');
             $s = $this->model_mem2->getIdLogs($t);
             echo "$s";
@@ -113,7 +113,7 @@ class Mem2 extends CI_Controller {
 		$this->load->model('model_mem2');
 		$this->load->model('model_users');
 		$t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t <= 2){
+        if ($this->session->userdata('is_logged_in') && $t == 2){
             $s = $this->model_mem2->getUniqueCompLogTable();
             echo "$s";
         } else {
@@ -125,7 +125,7 @@ class Mem2 extends CI_Controller {
 		$this->load->model('model_mem2');
 		$this->load->model('model_users');
 		$t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t <= 2){
+        if ($this->session->userdata('is_logged_in') && $t == 2){
             $t = $this->input->get('comp_id');
             $s = $this->model_mem2->getCompLogs($t);
             echo "$s";
@@ -133,6 +133,46 @@ class Mem2 extends CI_Controller {
             redirect('/main/restricted');
         }
     }
+	
+		public function getTable(){
+        $this->load->model('model_mem2');
+        $this->load->model('model_users');
+        $t = $this->model_users->getType($this->session->userdata('username'));
+        if ($this->session->userdata('is_logged_in') && $t == 2){
+            $u = $this->session->userdata('username');
+            $s = $this->model_mem2->getSpecificId($u);
+            echo "$s";
+        } else {
+            redirect('/main/restricted');
+        }
+    }
+	
+	public function getLogTable(){
+        $this->load->model('model_mem2');
+        $this->load->model('model_users');
+        $t = $this->model_users->getType($this->session->userdata('username'));
+        if ($this->session->userdata('is_logged_in') && $t == 2){
+            $u = $this->session->userdata('username');
+            $s = $this->model_mem2->getSpecificUsage($u);
+            echo "$s";
+        } else {
+            redirect('/main/restricted');
+        }
+    }
+	
+	public function getAllLogInfo(){
+        $this->load->model('model_mem2');
+        $this->load->model('model_users');
+        $t = $this->model_users->getType($this->session->userdata('username'));
+        if ($this->session->userdata('is_logged_in') && $t == 2){
+            //$u = $this->session->userdata('username');
+            $s = $this->model_mem2->getAllUsage();
+            echo "$s";
+        } else {
+            redirect('/main/restricted');
+        }
+    }
+
 		
 }
 
