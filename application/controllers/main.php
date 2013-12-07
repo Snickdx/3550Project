@@ -18,14 +18,16 @@ class Main extends CI_Controller {
         $this->form_validation->set_rules('username','Username','required|trim|xss_clean|callback_validate_credentials');
         $this->form_validation->set_rules('password','Password','required|sha1|trim');
         if($this->form_validation->run()){
+            $d = getdate();
             $data= array(
                 "username" => $this->input->post('username'),
                 "is_logged_in" => 1,
+                "date" => $d
             );
             $this->session->set_userdata($data);
             $this->load->model('model_users');
             $t = $this->model_users->getType($this->session->userdata('username'));
-            //$t = $this->model_users->getType();
+            $this->model_users->setLog($this->session->userdata('username'),$d);
             if($t == 4){
                 redirect('mem4/members4');
             } else if($t == 3){
@@ -62,6 +64,8 @@ class Main extends CI_Controller {
     }
     
     public function logout(){
+        $this->load->model('model_users');
+        $this->model_users->endLog($this->session->userdata('username'),$this->session->userdata('date'));
         $this->session->sess_destroy();
         redirect('main/login');
     }
