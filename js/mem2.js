@@ -35,10 +35,12 @@
 			var MenuContent = "";
 			$("#view2d2").html(MenuContent);
             $.get("/prjt/mem2/getUniqueIdLogs",function(data){
-                var i;
-                 MenuContent = "<select id='selStu' class='IDmenu'><option selected ='selected' value ='nothing'>Choose ID</option>";
+                var i,arr = [];
+                arr = orderList(data,"username");
+                MenuContent = "<select id='selStu' class='IDmenu'><option selected ='selected' value ='nothing'>Choose ID</option>";
                 for(i= 0; i < data.length; i++){	
-						MenuContent += '<option id ='+data[i].username+' value="'+data[i].username+'">' + data[i].username  + "</option>";	
+						//MenuContent += '<option id ='+data[i].username+' value="'+data[i].username+'">' + data[i].username  + "</option>";	
+						MenuContent += '<option id ='+arr[i]+' value="'+arr[i]+'">' + arr[i]  + "</option>";	
 				}
                 MenuContent += "</select>";
                 $("#view2d1").html(MenuContent); 
@@ -83,10 +85,12 @@
 			var content = "";
 			$("#view2d2").html(content);        
             $.get("/prjt/mem2/getUniqueCompLogs",function(data){
-                var i;
+                var i,arr = [];
+                arr = orderList(data,"comp_id");
                 var MenuContent = "<select id='selComp2' class='IDmenu'><option selected ='selected' value ='nothing'>Choose ID</option>";
                 for(i= 0; i < data.length; i++){
-						MenuContent += '<option id ='+data[i].comp_id+' value="'+data[i].comp_id+'">' + data[i].comp_id  + "</option>";	
+						//MenuContent += '<option id ='+data[i].comp_id+' value="'+data[i].comp_id+'">' + data[i].comp_id  + "</option>";	
+						MenuContent += '<option id ='+arr[i]+' value="'+arr[i]+'">' + arr[i]  + "</option>";	
 				}
                 MenuContent += "</select>";
                 $("#view2d1").html(MenuContent);
@@ -325,6 +329,15 @@
             }
         }
         return sum;
+    }
+    
+    function orderList(d,str){
+        var arr = [],i;
+        for(i=0;i<d.length;i++)
+            arr[i] = d[i][str];
+        arr.sort();
+        
+        return arr;
     }
  	
  }(this));
