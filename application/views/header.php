@@ -14,6 +14,12 @@
                 padding-top: 50px;
                 padding-bottom: 20px;
             }
+            .loader
+            {
+                position:fixed;
+                bottom:0;
+                left:600px;
+            }
         </style>
         <link rel="stylesheet" href="<?php echo site_url('css/bootstrap-theme.min.css'); ?>">
         <link rel="stylesheet" href="<?php echo site_url('css/main.css'); ?>">

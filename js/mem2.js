@@ -28,7 +28,7 @@
                 $("#view2d2").html(content);
             },"json");
 		});
-	
+	 
 	
 	//dynmically load student ids in options menu
 		$("#view2b1").click(function(){
@@ -266,6 +266,20 @@
                 $("#dispInfo").html(content); 
             },"json");
         });
+        
+        
+        $("#p2AllWebLog").click(function(){
+            $.get("/prjt/mem2/getWebLogTable",function(data){
+                var i, content = "<h2 class='text-center'>Website Logged Infomation</h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Username</th><th>Logged On</th><th>Logged Off</th></tr></thead><tbody>";
+                for(i= 0; i < data.length; i++){
+                    content += '<tr><td>' + data[i].username  + '</td>' + '<td>' + data[i].start  + '</td>' + '<td>' + data[i].end + '</td></tr>';
+                }
+                content += "</tbody></table>";
+                $("#webLog").html(content); 
+            },"json");
+        });
+        
+        
         
         //jquery get for the Log Table Button
         $("#p2LogTable").click(function(){

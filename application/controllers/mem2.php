@@ -22,7 +22,7 @@ class Mem2 extends CI_Controller {
             redirect('/main/restricted');
         }    
     }
-    
+     
     public function viewInfo2(){
         $this->load->model('model_users');
         $t = $this->model_users->getType($this->session->userdata('username'));
@@ -167,6 +167,18 @@ class Mem2 extends CI_Controller {
         if ($this->session->userdata('is_logged_in') && $t == 2){
             //$u = $this->session->userdata('username');
             $s = $this->model_mem2->getAllUsage();
+            echo "$s";
+        } else {
+            redirect('/main/restricted');
+        }
+    }
+
+	public function getWebLogTable(){
+        $this->load->model('model_mem2');
+        $this->load->model('model_users');
+        $t = $this->model_users->getType($this->session->userdata('username'));
+        if ($this->session->userdata('is_logged_in') && $t == 2){
+            $s = $this->model_mem2->getWebLogTable();
             echo "$s";
         } else {
             redirect('/main/restricted');

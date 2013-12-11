@@ -18,11 +18,8 @@ class Model_mem4 extends CI_Model{
     }
     
     public function getSpecificUsage($username){
-        //$sql = "SELECT * FROM  `usage` WHERE  `username` =868;";
-        //$this->db->query($sql);
-        $this->db->where('username',$username);
-        
-        $query = $this->db->get('usage');
+        $this->db->where('username',$username);    
+        $query = $this->db->get('usage',7,0);
             
         if($query->num_rows() > 0){
              //$row = $query->row(); 
@@ -30,6 +27,34 @@ class Model_mem4 extends CI_Model{
         } else {
             return false;
         }
-        //return $query;
     }
+    
+    public function getSize($username){
+        $this->db->where('username',$username);    
+        $query = $this->db->get('usage');
+        
+        if($query->num_rows() > 0){
+            return $query->num_rows();
+        } else {
+            return false;
+        }
+    }
+    
+    public function getInfTable($username,$load,$off){
+        $load = $load * 7;
+        $this->db->where('username',$username);    
+        $query = $this->db->get('usage',$off,$load);
+        $table="";
+        if($query->num_rows() > 0){
+            foreach ($query->result_array() as $row)
+            {
+               $table .= "<tr><td>".$row['date']."</td><td>".$row['comp_id']."</td><td>".$row['time']."</td></tr>";
+            }
+
+            return $table;
+        } else {
+            return false;
+        }
+    }
+    
 }

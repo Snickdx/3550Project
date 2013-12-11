@@ -1,10 +1,40 @@
 (function(window){
     $(document).ready(function(){
+        $(".loader").hide();
+        var load=0;
+        var offset = 7;
+        
+        
+        $(window).scroll(function(){
+                    var nbr = getSize();
+                    console.log(nbr);
+                    if ($("#myLogTable").length !== 0) {
+                    
+                        if($(window).scrollTop() === $(document).height()-$(window).height())
+                        {
+                            $(".loader").show();
+                            load++;
+                            if(load * 7 > nbr)
+                            {
+                                if((load-nbr) < 7)
+                                {	
+                                    offset = load-nbr;	
+                                }
+                                $(".loader").hide();
+                            }else{
+                                $.post("/prjt/mem4/infTable",{load:load,offset:offset},function(data){
+                                    $('#myLogTable tr:last').after(data);
+                                    $(".loader").hide();
+                                });
+                            }
+                        }
+                    }
+				});
         
         //jquery get for the User Info Button
         $("#p4Info").click(function(){
             $.get("/prjt/mem4/getTable",function(data){
-                var content = "<h2 class='text-center'>Student " + data.username + " Information</h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Id</th><th>Username(Student Id)</th><th>User Type</th></tr></thead><tbody>";
+                var content = "<h2 class='text-center'>Student " + data.username + " Information</h2><table id='myInfoTable' class='table table-striped table-bordered'><thead><tr><th>Id</th><th>Username(Student Id)</th><th>User Type</th></tr></thead><tbody>";
                 content += '<tr><td>' + data.id  + '</td>' + '<td>' + data.username  + '</td>' + '<td>' + data.type + '</td></tr>';
                 content += "</tbody></table>";
                 $("#dispInfo").html(content); 
@@ -15,7 +45,7 @@
         $("#p4LogTable").click(function(){
             $.get("/prjt/mem4/getLogTable",function(data){
                 var i;
-                var content = "<h2 class='text-center'>Student " + data[0].username + " Log</h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Date</th><th>Computer Id</th><th>Session Time(min)</th></tr></thead><tbody>";
+                var content = "<h2 class='text-center'>Student " + data[0].username + " Log</h2><table id='myLogTable' class='table table-striped table-bordered'><thead><tr><th>Date</th><th>Computer Id</th><th>Session Time(min)</th></tr></thead><tbody>";
                 for(i= 0; i < data.length; i++){
                     content += '<tr><td>' + data[i].date  + '</td>' + '<td>' + data[i].comp_id  + '</td>' + '<td>' + data[i].time + '</td></tr>';
                 }
@@ -24,12 +54,6 @@
             },"json");
         });
         
-        
-        /*$("#grp4b3").click(function(){
-            
-
-		
-	   });*/
         
         $("#p4Bargraph").click(function(){
              $.get("/prjt/mem4/getLogTable",function(data) {
@@ -67,6 +91,13 @@
                            
     });
     
-    
+    function getSize(){
+        var size;
+        $.get("/prjt/mem4/getSize",function(data){
+             size = parseInt(data);
+            console.log(size);
+            return size;
+        });
+    }
 
 }(this));
