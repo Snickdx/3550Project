@@ -1,7 +1,11 @@
-<h1>Delete Data From Database</h1>
+<?php include'members1.php'; ?>
+<?php echo'
+				<li>
+					<a class="btn btn-default btn-lg active" href="#">Delete From Databse</a>
+				</li>
+			</ul>
+		</body>
+	</html>'
+?>
 Enter Username(Student ID) : <input type="text" id="deleteUser" /><input type="submit" id="deleteSub" value="Delete"/>
 <div id="deleteResp"></div>
-<br> 
-<a href='<?php echo base_url()."mem1/members1" ?>'>Back</a>
-<br>
-<a href='<?php echo base_url()."main/logout" ?>'>Logout</a>

@@ -35,7 +35,7 @@ class Main extends CI_Controller {
             } else if($t == 2){
                 redirect('mem2/members2');
             } else if($t == 1){
-                redirect('mem1/members1');
+                redirect('mem1/graphs1');
             } else {
                 redirect('main');;
             }
