@@ -29,11 +29,11 @@ class Main extends CI_Controller {
             $t = $this->model_users->getType($this->session->userdata('username'));
             $this->model_users->setLog($this->session->userdata('username'),$d);
             if($t == 4){
-                redirect('mem4/members4');
+                redirect('mem4/graphs4');
             } else if($t == 3){
-                redirect('mem3/members3');
+                redirect('mem3/graphs3');
             } else if($t == 2){
-                redirect('mem2/members2');
+                redirect('mem2/graphs2');
             } else if($t == 1){
                 redirect('mem1/graphs1');
             } else {

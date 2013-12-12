@@ -1,11 +1,10 @@
-<?php include'members1.php'; ?>
-<?php echo'
-				<li>
-					<a class="btn btn-default btn-lg active" href="#">Delete From Databse</a>
-				</li>
-			</ul>
-		</body>
-	</html>'
+<?php 
+	include'members1.php'; 
+	echo'			<li>
+				<a class="btn btn-default btn-lg active">Delete From Database</a>
+			</li>
+		</ul>';
 ?>
-Enter Username(Student ID) : <input type="text" id="deleteUser" /><input type="submit" id="deleteSub" value="Delete"/>
-<div id="deleteResp"></div>
+
+		Enter Username(Student ID) : <input type="text" id="deleteUser" /><input type="submit" id="deleteSub" value="Delete"/>
+		<div id="deleteResp"></div>
