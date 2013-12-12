@@ -82,7 +82,7 @@ class Mem1 extends CI_Controller {
             redirect('/main/restricted');
         }    
     }
-    
+     
     public function delete(){
         $this->load->model('model_users');
         $t = $this->model_users->getType($this->session->userdata('username'));
@@ -240,6 +240,66 @@ class Mem1 extends CI_Controller {
         if ($this->session->userdata('is_logged_in') && $t == 1){
             $t = $this->input->get('user');
             $s = $this->model_mem1->getIdLogs2($t);
+            echo "$s";
+        } else {
+            redirect('/main/restricted');
+        }
+    }
+    
+    public function addUsageTable(){
+		$this->load->model('model_mem1');
+		$this->load->model('model_users');
+		$t = $this->model_users->getType($this->session->userdata('username'));
+        if ($this->session->userdata('is_logged_in') && $t == 1){
+            $u = $this->input->post('user');
+            $d = $this->input->post('date');
+            $t = $this->input->post('time');
+            $c = $this->input->post('comp');
+            $s = $this->model_mem1->addUsageTable($u,$d,$t,$c);
+            echo "$s";
+        } else {
+            redirect('/main/restricted');
+        }
+    }
+    
+    public function addUserTable(){
+		$this->load->model('model_mem1');
+		$this->load->model('model_users');
+		$t = $this->model_users->getType($this->session->userdata('username'));
+        if ($this->session->userdata('is_logged_in') && $t == 1){
+            $u = $this->input->post('user');
+            $p = $this->input->post('password');
+            $t = $this->input->post('type');
+            $s = $this->model_mem1->addUserTable($u,$p,$t);
+            echo "$s";
+        } else {
+            redirect('/main/restricted');
+        }
+    }
+    
+    public function deleteUser(){
+		$this->load->model('model_mem1');
+		$this->load->model('model_users');
+		$t = $this->model_users->getType($this->session->userdata('username'));
+        if ($this->session->userdata('is_logged_in') && $t == 1){
+            $u = $this->input->post('user');
+            $s = $this->model_mem1->deleteUser($u);
+            echo "$s";
+        } else {
+            redirect('/main/restricted');
+        }
+    }
+    
+    public function editUser(){
+		$this->load->model('model_mem1');
+		$this->load->model('model_users');
+		$t = $this->model_users->getType($this->session->userdata('username'));
+        if ($this->session->userdata('is_logged_in') && $t == 1){
+            $o = $this->input->post('ouser');
+            $u = $this->input->post('user');
+            $p = $this->input->post('password');
+            $t = $this->input->post('type');
+            $s = $this->model_mem1->editUser($o,$u,$p,$t);
             echo "$s";
         } else {
             redirect('/main/restricted');

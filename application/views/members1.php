@@ -6,11 +6,11 @@
     <br>
 	<a href='<?php echo base_url()."mem1/log" ?>'>View Log Info</a>
     <br>
-	 <a href='<?php echo base_url()."mem1/delete" ?>'>Add Member</a>
+	 <a href='<?php echo base_url()."mem1/add" ?>'>Add Member</a>
     <br>
     <a href='<?php echo base_url()."mem1/delete" ?>'>Delete Member</a>
     <br>
-    <a href='<?php echo base_url()."mem1/delete" ?>'>Edit Member Info</a>
+    <a href='<?php echo base_url()."mem1/edit" ?>'>Edit Member Info</a>
     <br>
 </div>
 

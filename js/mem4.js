@@ -7,7 +7,6 @@
         
         $(window).scroll(function(){
                     var nbr = getSize();
-                    console.log(nbr);
                     if ($("#myLogTable").length !== 0) {
                     
                         if($(window).scrollTop() === $(document).height()-$(window).height())
@@ -95,7 +94,6 @@
         var size;
         $.get("/prjt/mem4/getSize",function(data){
              size = parseInt(data);
-            console.log(size);
             return size;
         });
     }

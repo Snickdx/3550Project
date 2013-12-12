@@ -29,7 +29,7 @@
             },"json");
 		});
 	 
-	
+	 
 	//dynmically load student ids in options menu
 		$("#view1b1").click(function(){
 			var MenuContent = "";
@@ -365,6 +365,64 @@
 		});
 	
 	
+ 	$("#addb1").click(function(){
+        $("#addResponse").hide();
+        $("#addForm").html('<br><br><form id="addUserForm">Enter Username(Student ID): <input type="text" id="addUserUser" name="addUserUser"/><br><br>Enter Password: <input type="password" id="addUserPass" name="addUserPass"/><br><br>Enter User Type(1 to 4): <input type="text" id="addUserType" name="addUseType"/><br><input type="submit" name="submit" value"Add Record"/></form>');                     
+    });
+    
+    
+    $("#addb2").click(function(){
+        $("#addResponse").hide();
+        $("#addForm").html('<br><br><form id="addUsageForm">Enter Username: <input type="text" id="addUsageUser" name="addUsageUser"/><br><br>Date: <input type="text" id="addUsageDate" name="addUsageDate"/><br><br>Time Spent: <input type="text" id="addUsageTime" name="addUsageTime"/><br><br>Computer ID: <input type="text" id="addUsageComp" name="addUsageComp"/><br><input  type="submit" name="addUsageForm" value"Add Record"/></form>' );                     
+    });
+        
+    $("#deleteSub").click(function(){
+        var user = $("#deleteUser").val();
+        $.post("/prjt/mem1/deleteUser",{user:user},function(data){
+            $("#deleteResp").html(data);
+            return false;
+        });
+    });
+        
+   $("#editUserForm").submit(function(){
+        var ouser = $("#editUserOrg").val(); 
+        var user = $("#editUserUser").val(); if(user.length === 0 ) user = -999;
+        var password = $("#editUserPass").val(); if(password.length === 0 ) password = -999;
+        var type = $("#editUserType").val(); if(type.length === 0 ) type = -999;
+        $.post("/prjt/mem1/editUser",{ouser:ouser,user:user,password:password,type:type},function(data){
+            console.log(data);
+            $("#editResponse").html(data);
+            return false;
+        });
+       return false;
+    });
+        
+    $(document).on("submit","#addUsageForm",function(){
+        var user = $("#addUsageUser").val();
+        var date = $("#addUsageDate").val();
+        var time = $("#addUsageTime").val();
+        var comp = $("#addUsageComp").val();
+        $.post("/prjt/mem1/addUsageTable",{user:user,date:date,time:time,comp:comp},function(data){
+            $("#addResponse").html(data);
+            $("#addResponse").show();
+            return false;
+        });
+        return false;
+    });
+ 	
+ 	
+ 	$(document).on("submit","#addUserForm",function(){
+        var user = $("#addUserUser").val();
+        var password = $("#addUserPass").val();
+        var type = $("#addUserType").val();
+        $.post("/prjt/mem1/addUserTable",{user:user,password:password,type:type},function(data){
+            $("#addResponse").html(data);
+            $("#addResponse").show();
+            return false;
+        });
+        return false;
+    });
+ 	
  	
  	
  	
