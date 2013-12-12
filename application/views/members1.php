@@ -1,14 +1,16 @@
 <h1>Members 1 (Admin)Page</h1>
 <div id="row">
-    <a href='<?php echo base_url()."mem1/graphs1" ?>'>Graphs</a>
+    <a href='<?php echo base_url()."mem1/graphs1" ?>'>Personal Info</a>
     <br>
-    <a href='<?php echo base_url()."mem1/viewInfo1" ?>'>View</a>
+    <a href='<?php echo base_url()."mem1/viewInfo1" ?>'>View Usage Info</a>
     <br>
-    <a href='<?php echo base_url()."mem1/delete" ?>'>Delete</a>
+	<a href='<?php echo base_url()."mem1/log" ?>'>View Log Info</a>
     <br>
-    <a href='<?php echo base_url()."mem1/delete" ?>'>Add</a>
+	 <a href='<?php echo base_url()."mem1/delete" ?>'>Add Member</a>
     <br>
-    <a href='<?php echo base_url()."mem1/delete" ?>'>Edit</a>
+    <a href='<?php echo base_url()."mem1/delete" ?>'>Delete Member</a>
+    <br>
+    <a href='<?php echo base_url()."mem1/delete" ?>'>Edit Member Info</a>
     <br>
 </div>
 

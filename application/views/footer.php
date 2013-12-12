@@ -10,8 +10,8 @@
         <script src="<?php echo base_url();?>js/mem4.js"></script>
 		<script src="<?php echo base_url();?>js/mem3.js"></script>
 		<script src="<?php echo base_url();?>js/mem2.js"></script>
-		<!--<script src="<?php echo base_url();?>js/mem1.js"></script>
-		-->
+		<script src="<?php echo base_url();?>js/mem1.js"></script>
+		
     </body>
 </html>
 

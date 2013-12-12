@@ -1,6 +1,6 @@
 <?php
 
-class Model_mem2 extends CI_Model{
+class Model_mem1 extends CI_Model{
 
 	public function getUniqueDateLogTable(){
 		$this->db->distinct();

@@ -52,7 +52,7 @@ class Mem2 extends CI_Controller {
         $t = $this->model_users->getType($this->session->userdata('username'));
         if ($this->session->userdata('is_logged_in') && $t == 2){
             $this->load->view('header');
-            $this->load->view('log');
+            $this->load->view('managerlog');
             $this->load->view('footer');
         } else {
             redirect('/main/restricted');
@@ -96,6 +96,19 @@ class Mem2 extends CI_Controller {
         }
     }
 	
+		public function getUniqueIdLogs2(){
+		$this->load->model('model_mem2');
+		$this->load->model('model_users');
+		$t = $this->model_users->getType($this->session->userdata('username'));
+        if ($this->session->userdata('is_logged_in') && $t == 2){
+            $s = $this->model_mem2->getUniqueIdLogTable2();
+            echo "$s";
+        } else {
+            redirect('/main/restricted');
+        }
+    }
+
+	
 	public function getIdLogTable(){
 		$this->load->model('model_mem2');
 		$this->load->model('model_users');
@@ -103,6 +116,19 @@ class Mem2 extends CI_Controller {
         if ($this->session->userdata('is_logged_in') && $t == 2){
             $t = $this->input->get('user');
             $s = $this->model_mem2->getIdLogs($t);
+            echo "$s";
+        } else {
+            redirect('/main/restricted');
+        }
+    }
+	
+	public function getIdLogTable2(){
+		$this->load->model('model_mem2');
+		$this->load->model('model_users');
+		$t = $this->model_users->getType($this->session->userdata('username'));
+        if ($this->session->userdata('is_logged_in') && $t == 2){
+            $t = $this->input->get('user');
+            $s = $this->model_mem2->getIdLogs2($t);
             echo "$s";
         } else {
             redirect('/main/restricted');

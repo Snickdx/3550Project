@@ -1,22 +1,22 @@
 (function(window){
 	$(document).ready(function(){
-		$("#view2b6").click(function(){
+		$("#view1b6").click(function(){
 			var MenuContent = "";
-			$("#view2d2").html(MenuContent);
-			$.get("/prjt/mem2/getUniqueDateLogs",function(data){
+			$("#view1d2").html(MenuContent);
+			$.get("/prjt/mem1/getUniqueDateLogs",function(data){
 				var i,j; var datesSeen = [],unSeen = true;
-				MenuContent = "<select id='selDate' class='IDmenu'><option selected ='selected' value ='nothing'>Choose ID</option>";
+				MenuContent = "<select id='selDate1' class='IDmenu'><option selected ='selected' value ='nothing'>Choose ID</option>";
 				for(i=0;i<data.length;i++){
 					MenuContent += '<option id ='+data[i].date+' value="'+data[i].date+'">' + data[i].date + "</option>";
 				}
 				MenuContent += "</select>";
-				$("#view2d1").html(MenuContent);		
+				$("#view1d1").html(MenuContent);		
 			},"json");
 		});
 		
-		$(document).on("change","#selDate",function(){
+		$(document).on("change","#selDate1",function(){
             var dateS = $(this).val();
-            $.get("/prjt/mem2/getDateLogTable",{dateS:dateS},function(data){
+            $.get("/prjt/mem1/getDateLogTable",{dateS:dateS},function(data){
                 var i;
                 var content = "<h2 class='text-center'> Log for "+ dateS +"</h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Username</th><th>Comp ID</th><th>Session Time(min)</th></tr></thead><tbody>";
                 for(i= 0; i < data.length; i++){
@@ -25,32 +25,32 @@
 					}
 				}
                 content += "</tbody></table>";
-                $("#view2d2").html(content);
+                $("#view1d2").html(content);
             },"json");
 		});
 	 
 	
 	//dynmically load student ids in options menu
-		$("#view2b1").click(function(){
+		$("#view1b1").click(function(){
 			var MenuContent = "";
-			$("#view2d2").html(MenuContent);
-            $.get("/prjt/mem2/getUniqueIdLogs",function(data){
+			$("#view1d2").html(MenuContent);
+            $.get("/prjt/mem1/getUniqueIdLogs",function(data){
                 var i,arr = [];
                 arr = orderList(data,"username");
-                MenuContent = "<select id='selStu' class='IDmenu'><option selected ='selected' value ='nothing'>Choose ID</option>";
+                MenuContent = "<select id='selStu1' class='IDmenu'><option selected ='selected' value ='nothing'>Choose ID</option>";
                 for(i= 0; i < data.length; i++){	
 						//MenuContent += '<option id ='+data[i].username+' value="'+data[i].username+'">' + data[i].username  + "</option>";	
 						MenuContent += '<option id ='+arr[i]+' value="'+arr[i]+'">' + arr[i]  + "</option>";	
 				}
                 MenuContent += "</select>";
-                $("#view2d1").html(MenuContent); 
+                $("#view1d1").html(MenuContent); 
             },"json");
         });
 		
 		//load table for selected Student ID
-		$(document).on("change","#selStu",function(){
+		$(document).on("change","#selStu1",function(){
             var user = $(this).val();
-            $.get("/prjt/mem2/getIdLogTable",{user:user},function(data){
+            $.get("/prjt/mem1/getIdLogTable",{user:user},function(data){
                 var i;
                 var content = "<h2 class='text-center'>Students </h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Date</th><th>Computer ID</th><th>Session Time(min)</th></tr></thead><tbody>";
                 for(i= 0; i < data.length; i++){
@@ -59,14 +59,14 @@
 					}
 				}
                 content += "</tbody></table>";
-                $("#view2d2").html(content);
+                $("#view1d2").html(content);
             },"json");
 		});
 	
 		//load table for selected Computer ID
-		$(document).on("change","#selComp2",function(){
+		$(document).on("change","#selComp1",function(){
             var comp = $(this).val();            
-            $.get("/prjt/mem2/getCompLogTable",{comp_id:comp},function(data){
+            $.get("/prjt/mem1/getCompLogTable",{comp_id:comp},function(data){
                 var i;
                 var content = "<h2 class='text-center'>Computer</h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Date</th><th>User logged in</th><th>Session Time(min)</th></tr></thead><tbody>";
                 for(i= 0; i < data.length; i++){
@@ -75,41 +75,41 @@
 					}
 				}
                 content += "</tbody></table>";
-                $("#view2d2").html(content);
+                $("#view1d2").html(content);
             },"json");
 		});
     
  
 	//dynamically loading the computer IDs for the "select a computer" button
-	$("#view2b2").click(function(){
+	$("#view1b2").click(function(){
 			var content = "";
-			$("#view2d2").html(content);        
-            $.get("/prjt/mem2/getUniqueCompLogs",function(data){
+			$("#view1d2").html(content);        
+            $.get("/prjt/mem1/getUniqueCompLogs",function(data){
                 var i,arr = [];
                 arr = orderList(data,"comp_id");
-                var MenuContent = "<select id='selComp2' class='IDmenu'><option selected ='selected' value ='nothing'>Choose ID</option>";
+                var MenuContent = "<select id='selComp1' class='IDmenu'><option selected ='selected' value ='nothing'>Choose ID</option>";
                 for(i= 0; i < data.length; i++){
 						//MenuContent += '<option id ='+data[i].comp_id+' value="'+data[i].comp_id+'">' + data[i].comp_id  + "</option>";	
 						MenuContent += '<option id ='+arr[i]+' value="'+arr[i]+'">' + arr[i]  + "</option>";	
 				}
                 MenuContent += "</select>";
-                $("#view2d1").html(MenuContent);
+                $("#view1d1").html(MenuContent);
             },"json");
         });
 	
 	
 		//content for the all logged information
-	$("#view2b3").click(function(){
+	$("#view1b3").click(function(){
 		var content ="";
-			$("#view2d1").html(content);
-			$.get("/prjt/mem2/getAllLogInfo",function(data){
+			$("#view1d1").html(content);
+			$.get("/prjt/mem1/getAllLogInfo",function(data){
                 var i;
                 var content = "<h2 class='text-center'>Date Log: " + data[0].date + " </h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Username</th><th>Computer Id</th><th>Session Time(min)</th></tr></thead><tbody>";
                 for(i= 0; i < data.length; i++){
                     content += '<tr><td>' + data[i].username + '</td>' + '<td>' + data[i].comp_id  + '</td>' + '<td>' + data[i].time + '</td></tr>';
                 }
                 content += "</tbody></table>";
-                $("#view2d2").html(content);
+                $("#view1d2").html(content);
             },"json");
 	
 	
@@ -118,8 +118,8 @@
 	
 	
 	//line graph
-	$("#view2b4").click(function(){
-			$.get("/prjt/mem2/getAllLogInfo",function(data){
+	$("#view1b4").click(function(){
+			$.get("/prjt/mem1/getAllLogInfo",function(data){
 				var i,k;var timesSeen = [];
 				var unSeen = true; var freq = [];
 				for(i=0;i<data.length;i++){
@@ -150,7 +150,7 @@
 					}
 				}
 				//console.log(typeof(timesSeen[0]));
-				$('#view2d2').highcharts({
+				$('#view1d2').highcharts({
             title: {
                 text: 'Time Spent Logged In',
                 x: -20 //center
@@ -193,8 +193,8 @@
  	
  	
 	//pie chart
-	$("#view2b5").click(function(){
-            $.get("/prjt/mem2/getAllLogInfo",function(data) {
+	$("#view1b5").click(function(){
+            $.get("/prjt/mem1/getAllLogInfo",function(data) {
                 
 				//need to calculate the actual data for pie chart
 				var i,j,k;var finalArrayData = [];
@@ -220,7 +220,7 @@
 				
 				
 				//loads pie chart
-				$("#view2d2").highcharts({
+				$("#view1d2").highcharts({
                     chart: {
                         plotBackgroundColor: null,
                         plotBorderWidth: null,
@@ -258,8 +258,8 @@
  	
  	
  	
-	$("#p2Info").click(function(){
-            $.get("/prjt/mem2/getTable",function(data){
+	$("#p1Info").click(function(){
+            $.get("/prjt/mem1/getTable",function(data){
                 var content = "<h2 class='text-center'>Student " + data.username + " Information</h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Id</th><th>Username(Student Id)</th><th>User Type</th></tr></thead><tbody>";
                 content += '<tr><td>' + data.id  + '</td>' + '<td>' + data.username  + '</td>' + '<td>' + data.type + '</td></tr>';
                 content += "</tbody></table>";
@@ -268,25 +268,25 @@
         });
         
         
-        $("#log2b2").click(function(){
+        $("#log1b2").click(function(){
 			var content = "";
-			$("#log2d1").html(content);
-            $.get("/prjt/mem2/getWebLogTable",function(data){
+			$("#log1d1").html(content);
+            $.get("/prjt/mem1/getWebLogTable",function(data){
                 var i;
-				content = "<h2 class='text-center'>Website Logged Infomation</h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Log ID</th><th>Username</th><th>Logged On</th><th>Logged Off</th></tr></thead><tbody>";
+				content = "<h2 class='text-center'>Website Logged Infomation</h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Username</th><th>Logged On</th><th>Logged Off</th></tr></thead><tbody>";
                 for(i= 0; i < data.length; i++){
                     content += '<tr><td>'+data[i].id+'</td><td>' + data[i].username  + '</td>' + '<td>' + data[i].start  + '</td>' + '<td>' + data[i].end + '</td></tr>';
                 }
                 content += "</tbody></table>";
-                $("#log2d2").html(content); 
+                $("#log1d2").html(content); 
             },"json");
         });
         
         
         
         //jquery get for the Log Table Button
-        $("#p2LogTable").click(function(){
-            $.get("/prjt/mem2/getLogTable",function(data){
+        $("#p1LogTable").click(function(){
+            $.get("/prjt/mem1/getLogTable",function(data){
                 var i;
                 var content = "<h2 class='text-center'>Student " + data[0].username + " Log</h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Date</th><th>Computer Id</th><th>Session Time(min)</th></tr></thead><tbody>";
                 for(i= 0; i < data.length; i++){
@@ -297,8 +297,8 @@
             },"json");
         });
         
-        $("#p2Bargraph").click(function(){
-             $.get("/prjt/mem2/getLogTable",function(data) {
+        $("#p1Bargraph").click(function(){
+             $.get("/prjt/mem1/getLogTable",function(data) {
                 var i,time=[],date=[];
                 for(i = 0; i < data.length; i++){
                     time.push(parseInt(data[i].time));
@@ -330,29 +330,28 @@
             
             },"json");
         });
-	
-	
-	//dynmically load student ids in options menu
-		$("#log2b1").click(function(){
+		
+		//dynmically load student ids in options menu
+		$("#log1b1").click(function(){
 			var MenuContent = "";
-			$("#log2d2").html(MenuContent);
-            $.get("/prjt/mem2/getUniqueIdLogs2",function(data){
+			$("#log1d2").html(MenuContent);
+            $.get("/prjt/mem1/getUniqueIdLogs2",function(data){
                 var i,arr = [];
                 arr = orderList(data,"username");
-                MenuContent = "<select id='selStuLog' class='IDmenu'><option selected ='selected' value ='nothing'>Choose ID</option>";
+                MenuContent = "<select id='selStuLog2' class='IDmenu'><option selected ='selected' value ='nothing'>Choose ID</option>";
                 for(i= 0; i < data.length; i++){	
 						//MenuContent += '<option id ='+data[i].username+' value="'+data[i].username+'">' + data[i].username  + "</option>";	
 						MenuContent += '<option id ='+arr[i]+' value="'+arr[i]+'">' + arr[i]  + "</option>";	
 				}
                 MenuContent += "</select>";
-                $("#log2d1").html(MenuContent); 
+                $("#log1d1").html(MenuContent); 
             },"json");
         });
 		
 		//load table for selected Student ID
-		$(document).on("change","#selStuLog",function(){
+		$(document).on("change","#selStuLog2",function(){
             var user = $(this).val();
-            $.get("/prjt/mem2/getIdLogTable2",{user:user},function(data){
+            $.get("/prjt/mem1/getIdLogTable2",{user:user},function(data){
                 var i;
                 var content = "<h2 class='text-center'>Logs</h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Log ID</th><th>Log Start Time</th><th>Log End Time</th></tr></thead><tbody>";
                 for(i= 0; i < data.length; i++){
@@ -361,10 +360,9 @@
 					}
 				}
                 content += "</tbody></table>";
-                $("#log2d2").html(content);
+                $("#log1d2").html(content);
             },"json");
 		});
-	
 	
 	
  	
