@@ -367,13 +367,13 @@
 	
  	$("#addb1").click(function(){
         $("#addResponse").hide();
-        $("#addForm").html('<br><br><form id="addUserForm">Enter Username(Student ID): <input type="text" id="addUserUser" name="addUserUser"/><br><br>Enter Password: <input type="password" id="addUserPass" name="addUserPass"/><br><br>Enter User Type(1 to 4): <input type="text" id="addUserType" name="addUseType"/><br><input type="submit" name="submit" value"Add Record"/></form>');                     
+        $("#addForm").html('<br><br><form id="addUserForm">Enter Username(Student ID): <input type="text" id="addUserUser" name="addUserUser" required/><br><br>Enter Password: <input type="password" id="addUserPass" name="addUserPass" required/><br><br>Enter User Type(1 to 4): <input type="text" id="addUserType" name="addUseType"required/><br><input type="submit" name="submit" value"Add Record"/></form>');                     
     });
     
     
     $("#addb2").click(function(){
         $("#addResponse").hide();
-        $("#addForm").html('<br><br><form id="addUsageForm">Enter Username: <input type="text" id="addUsageUser" name="addUsageUser"/><br><br>Date: <input type="text" id="addUsageDate" name="addUsageDate"/><br><br>Time Spent: <input type="text" id="addUsageTime" name="addUsageTime"/><br><br>Computer ID: <input type="text" id="addUsageComp" name="addUsageComp"/><br><input  type="submit" name="addUsageForm" value"Add Record"/></form>' );                     
+        $("#addForm").html('<br><br><form id="addUsageForm">Enter Username: <input type="text" id="addUsageUser" name="addUsageUser"required/><br><br>Date: <input type="text" id="addUsageDate" name="addUsageDate" required/><br><br>Time Spent: <input type="text" id="addUsageTime" name="addUsageTime" required/><br><br>Computer ID: <input type="text" id="addUsageComp" name="addUsageComp" required/><br><input  type="submit" name="addUsageForm" value"Add Record"/></form>' );                     
     });
         
     $("#deleteSub").click(function(){
@@ -384,43 +384,63 @@
         });
     });
         
-   $("#editUserForm").submit(function(){
+   $("#editUserForm").click(function(){
         var ouser = $("#editUserOrg").val(); 
         var user = $("#editUserUser").val(); if(user.length === 0 ) user = -999;
         var password = $("#editUserPass").val(); if(password.length === 0 ) password = -999;
-        var type = $("#editUserType").val(); if(type.length === 0 ) type = -999;
-        $.post("/prjt/mem1/editUser",{ouser:ouser,user:user,password:password,type:type},function(data){
-            console.log(data);
-            $("#editResponse").html(data);
-            return false;
-        });
+        var type = parseInt($("#editUserType").val()); if(type.length === 0 ) type = -999;
+       if(validateUser(type) === true){
+            $.post("/prjt/mem1/editUser",{ouser:ouser,user:user,password:password,type:type},function(data){
+                $("#editResponse").html(data);
+                return false;
+            });
+           return false;
+       }else {
+            $("#editResponse").html("<p>User Type Must Be A Number(1 to 4)");  
+           return false;
+       }
        return false;
     });
         
     $(document).on("submit","#addUsageForm",function(){
         var user = $("#addUsageUser").val();
         var date = $("#addUsageDate").val();
-        var time = $("#addUsageTime").val();
-        var comp = $("#addUsageComp").val();
-        $.post("/prjt/mem1/addUsageTable",{user:user,date:date,time:time,comp:comp},function(data){
-            $("#addResponse").html(data);
-            $("#addResponse").show();
+        var time = parseInt($("#addUsageTime").val());
+        var comp = parseInt($("#addUsageComp").val());
+        if(validateUsage(date,time,comp) === true){
+            $.post("/prjt/mem1/addUsageTable",{user:user,date:date,time:time,comp:comp},function(data){
+                $("#addResponse").html(data);
+                $("#addResponse").show();
+                return false;
+            });
             return false;
-        });
-        return false;
+        }else {
+            $("#addResponse").html("<p>User Type Must Be A Number(1 to 4)"); 
+            $("#addResponse").show();
+           return false;
+       }
+       return false;
+        
     });
  	
  	
  	$(document).on("submit","#addUserForm",function(){
         var user = $("#addUserUser").val();
         var password = $("#addUserPass").val();
-        var type = $("#addUserType").val();
-        $.post("/prjt/mem1/addUserTable",{user:user,password:password,type:type},function(data){
-            $("#addResponse").html(data);
-            $("#addResponse").show();
+        var type = parseInt($("#addUserType").val());
+        if(validateUser(type) === true){
+            $.post("/prjt/mem1/addUserTable",{user:user,password:password,type:type},function(data){
+                $("#addResponse").html(data);
+                $("#addResponse").show();
+                return false;
+            });
             return false;
-        });
-        return false;
+        }else {
+            $("#addResponse").html("<p>User Type Must Be A Number(1 to 4)"); 
+            $("#addResponse").show();
+           return false;
+       }
+       return false;
     });
  	
  	
@@ -429,6 +449,22 @@
  	
  	
  	});
+    
+    
+    function validateUser(n){
+        if (n === -999) return true;
+        if(n>0 && n<5) return true;
+        return false;
+    }
+    
+    function validateUsage(str,time,comp){
+        if(time < 0) return false;
+        if(comp < 0) return false;
+        if(str.substring(2,3) !== "-" || str.substring(2,3) !== "-" || str.length !== 10 )
+           return false;
+        return true;
+    }
+    
 	function getSum(data,key){
         var sum=0,i;
         for(i=0;i<data.length;i++){
