@@ -1,7 +1,7 @@
 <?php 
 	include'members3.php'; 
 	echo'			<li>
-				<a class="btn btn-default btn-lg active">Logins Information</a>
+				<a class="btn btn-default btn-lg active">Manager Information</a>
 			</li>
 		</ul>';
 ?>

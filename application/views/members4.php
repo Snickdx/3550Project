@@ -10,7 +10,7 @@
 					</a>
 					<ul class="dropdown-menu">
 						<li>
-							<a href='<?php echo base_url()."mem4/graphs4" ?>'>Graphs and Tables</a>
+							<a href='<?php echo base_url()."mem4/graphs4" ?>'>Personal Info and Graphs</a>
 						</li>
 						<li>
 							<a href='<?php echo base_url()."main/logout" ?>'>Logout</a>
@@ -19,5 +19,5 @@
 				</li>
 			</li>
 			<li>
-				<a class="btn btn-default btn-lg active" href="#">Supervisor View</a>
+				<a class="btn btn-default btn-lg active" href="#">Student View</a>
 			</li>

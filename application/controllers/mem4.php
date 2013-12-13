@@ -24,7 +24,7 @@ class Mem4 extends CI_Controller {
             $this->load->view('graphs4');
             $this->load->view('footer');
         } else {
-            redirect('/main/restricted');
+            redirect('/main/restricted'); 
         }
     } 
     

@@ -63,7 +63,6 @@ class Model_mem3 extends CI_Model{
 		$this->db->where('date',$t);
 		$query = $this->db->get('usage');
 		if($query->num_rows() > 0){
-             //$row = $query->row(); 
             return json_encode($query->result());
         } else {
             return false;
@@ -100,4 +99,5 @@ class Model_mem3 extends CI_Model{
         }
         //return $query;
     }
+
 }

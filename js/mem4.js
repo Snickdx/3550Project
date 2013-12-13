@@ -1,34 +1,6 @@
 (function(window){
     $(document).ready(function(){
-        $(".loader").hide();
-        var load=0;
-        var offset = 7;
         
-        
-        $(window).scroll(function(){
-                    var nbr = getSize();
-                    if ($("#myLogTable").length !== 0) {
-                    
-                        if($(window).scrollTop() === $(document).height()-$(window).height())
-                        {
-                            $(".loader").show();
-                            load++;
-                            if(load * 7 > nbr)
-                            {
-                                if((load-nbr) < 7)
-                                {	
-                                    offset = load-nbr;	
-                                }
-                                $(".loader").hide();
-                            }else{
-                                $.post("/prjt/mem4/infTable",{load:load,offset:offset},function(data){
-                                    $('#myLogTable tr:last').after(data);
-                                    $(".loader").hide();
-                                });
-                            }
-                        }
-                    }
-				});
         
         //jquery get for the User Info Button
         $("#p4Info").click(function(){
@@ -89,13 +61,6 @@
         });
                            
     });
-    
-    function getSize(){
-        var size;
-        $.get("/prjt/mem4/getSize",function(data){
-             size = parseInt(data);
-            return size;
-        });
-    }
+
 
 }(this));

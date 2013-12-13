@@ -156,5 +156,18 @@ class Mem3 extends CI_Controller {
             redirect('/main/restricted');
         }
     }
+    
+    public function infTable(){
+        $this->load->model('model_mem4');
+        $this->load->model('model_users');
+        $t = $this->model_users->getType($this->session->userdata('username'));
+        if ($this->session->userdata('is_logged_in') && $t == 4){
+            $u = $this->session->userdata('username');
+            $s = $this->model_mem4->getInfTable($u,$this->input->post('load'),$this->input->post('offset'));
+            echo "$s";
+        } else {
+            redirect('/main/restricted');
+        }
+    }
 }
 
