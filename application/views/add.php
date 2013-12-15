@@ -1,10 +1,5 @@
-<?php 
-	include'members1.php'; 
-	echo'			<li>
-				<a class="btn btn-default btn-lg active">Add to Database</a>
-			</li>
-		</ul>';
-?>
+
+
 
 		<br>
 		<button class="btn btn-primary" id="addb1">User Database</button>

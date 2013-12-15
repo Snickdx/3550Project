@@ -8,11 +8,12 @@
         <link rel="stylesheet" href="<?php echo site_url('css/bootstrap.min.css'); ?>">
         <style>
             body {
-                padding-top: 50px;
                 padding-bottom: 20px;
+ 				background-repeat: no-repeat;
+ 				background-color:#b0c4de;
+				background-size:cover;
             }
-            .loader
-            {
+            .loader{
                 position:fixed;
                 bottom:0;
                 left:600px;

@@ -1,9 +1,5 @@
 <?php 
-	include'members1.php'; 
-	echo'			<li>
-				<a class="btn btn-default btn-lg active">Admin Information</a>
-			</li>
-		</ul>';
+	include'members1.php';
 ?>
 
 		<br>
@@ -13,6 +9,6 @@
 		<br><br><br>
 		<div class="row">
 		    <div class="col-md-2"></div>
-		    <div id="dispInfo" class="col-md-8"></div>
+		    	<div id="dispInfo" class="col-md-8"></div>
 		    <div class="col-md-2"></div>
 		</div>

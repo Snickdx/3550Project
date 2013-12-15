@@ -1,10 +1,4 @@
-<?php 
-	include'members1.php'; 
-	echo'			<li>
-				<a class="btn btn-default btn-lg active">Usage Information</a>
-			</li>
-		</ul>';
-?>
+
 
 		<br>
 		<button class="btn btn-primary" id="view1b1">Select a Student</button>
