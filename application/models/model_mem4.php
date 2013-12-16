@@ -40,4 +40,21 @@ class Model_mem4 extends CI_Model{
         }
     }
     
+        public function getInfTable($username,$load,$off){
+        $load = $load * 7;
+        $this->db->where('username',$username);    
+        $query = $this->db->get('usage',$off,$load);
+        $table="";
+        if($query->num_rows() > 0){
+            foreach ($query->result_array() as $row)
+            {
+               $table .= "<tr><td>".$row['date']."</td><td>".$row['comp_id']."</td><td>".$row['time']."</td></tr>";
+            }
+
+            return $table;
+        } else {
+            return false;
+        }
+    }
+    
 }
