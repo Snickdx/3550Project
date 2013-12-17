@@ -13,11 +13,20 @@
  				background-color:#b0c4de;
 				background-size:cover;
             }
+			
             .loader{
                 position:fixed;
                 bottom:0;
                 left:600px;
             }
+			.stdheight{
+				height: 525px;
+				max-height: 525px;
+			}
+			.tblHeight{
+				height: 325px;
+				max-height: 325px;
+			}
         </style>
         <link rel="stylesheet" href="<?php echo site_url('css/bootstrap-theme.min.css'); ?>">
         <link rel="stylesheet" href="<?php echo site_url('css/main.css'); ?>">

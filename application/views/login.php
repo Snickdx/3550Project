@@ -3,9 +3,11 @@
 </head>
 
 <body>
+	<div class=" tblHieght jumbotron btn btn-primary active col-lg-12">
+		<h1>Desktop Activity Tracking Application</h1>
+	</div>
 
-
-	<div class=" row jumbotron container btn btn-default active col-md-6 col-md-offset-3">
+	<div class=" jumbotron container btn btn-default active col-md-6 col-md-offset-3">
 		<div id="container">
 			<h1>Please Login</h1>
 			<br>

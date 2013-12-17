@@ -5,10 +5,7 @@
         <script src="<?php echo base_url();?>js/highcharts.js"></script>
         <script src="<?php echo base_url();?>js/vendor/bootstrap.min.js"></script>
         <script src="<?php echo base_url();?>js/main.js"></script>
-        <script src="<?php echo base_url();?>js/mem4.js"></script>
-		<script src="<?php echo base_url();?>js/mem3.js"></script>
-		<script src="<?php echo base_url();?>js/mem2.js"></script>
-		<script src="<?php echo base_url();?>js/mem1.js"></script>
+        <script src="<?php echo base_url();?>js/views.js"></script>
     </body>
 </html>
 

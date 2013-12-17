@@ -29,13 +29,13 @@ class Main extends CI_Controller {
             $t = $this->model_users->getType($this->session->userdata('username'));
             $this->model_users->setLog($this->session->userdata('username'),$d);
             if($t == 4){
-                redirect('mem4/graphs4');
+                redirect('mem1/studentView');
             } else if($t == 3){
-                redirect('mem3/graphs3');
+                redirect('mem1/superVisorView');
             } else if($t == 2){
-                redirect('mem2/graphs2');
+                redirect('mem1/managerView');
             } else if($t == 1){
-                redirect('mem1/members1');
+                redirect('mem1/adminView');
             } else {
                 redirect('main');;
             }

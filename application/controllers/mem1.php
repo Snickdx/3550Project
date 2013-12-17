@@ -11,95 +11,60 @@ class Mem1 extends CI_Controller {
         $this->load->view('login');
     }
     
-    public function members1(){
+    public function adminView(){
         $this->load->model('model_users');
         $t = $this->model_users->getType($this->session->userdata('username'));
         if ($this->session->userdata('is_logged_in') && $t == 1){
             $this->load->view('header');
-            $this->load->view('members1');
+            $this->load->view('adminView');
             $this->load->view('footer');
         } else {
             redirect('/main/restricted');
         }    
     }
     
-    public function viewInfo1(){
+    public function managerView(){
         $this->load->model('model_users');
         $t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t == 1){
+        if ($this->session->userdata('is_logged_in') && $t == 2){
             $this->load->view('header');
-            $this->load->view('viewInfo1');
-            $this->load->view('footer');
-        } else {
-            redirect('/main/restricted');
-        }    
-    }
-    
-    public function graphs1(){
-        $this->load->model('model_users');
-        $t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t == 1){
-            $this->load->view('header');
-            $this->load->view('graphs1');
+            $this->load->view('managerView');
             $this->load->view('footer');
         } else {
             redirect('/main/restricted');
         }    
     }
 	
-	public function log(){
+     public function supervisorView(){
         $this->load->model('model_users');
         $t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t == 1){
+        if ($this->session->userdata('is_logged_in') && $t == 3){
             $this->load->view('header');
-            $this->load->view('adminLog');
-            $this->load->view('footer');
-        } else {
-            redirect('/main/restricted');
-        }    
-    }
-    
-    public function add(){
-        $this->load->model('model_users');
-        $t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t == 1){
-            $this->load->view('header');
-            $this->load->view('add');
+            $this->load->view('supervisorView');
             $this->load->view('footer');
         } else {
             redirect('/main/restricted');
         }    
     }
 
-    public function edit(){
+    public function studentView(){
         $this->load->model('model_users');
         $t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t == 1){
+        if ($this->session->userdata('is_logged_in') && $t == 4){
             $this->load->view('header');
-            $this->load->view('edit');
+            $this->load->view('studentView');
             $this->load->view('footer');
         } else {
             redirect('/main/restricted');
-        }    
+        }
     }
-     
-    public function delete(){
-        $this->load->model('model_users');
-        $t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t == 1){
-            $this->load->view('header');
-            $this->load->view('delete');
-            $this->load->view('footer');
-        } else {
-            redirect('/main/restricted');
-        }    
-    }
-	
+        
+
 	public function getTable(){
         $this->load->model('model_mem1');
         $this->load->model('model_users');
         $t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t == 1){
+        if ($this->session->userdata('is_logged_in')){
             $u = $this->session->userdata('username');
             $s = $this->model_mem1->getSpecificId($u);
             echo "$s";
@@ -112,7 +77,7 @@ class Mem1 extends CI_Controller {
         $this->load->model('model_mem1');
         $this->load->model('model_users');
         $t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t == 1){
+        if ($this->session->userdata('is_logged_in')){
             $u = $this->session->userdata('username');
             $s = $this->model_mem1->getSpecificUsage($u);
             echo "$s";
@@ -125,7 +90,7 @@ class Mem1 extends CI_Controller {
 		$this->load->model('model_mem1');
 		$this->load->model('model_users');
 		$t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t == 1){
+        if ($this->session->userdata('is_logged_in') ){
             $s = $this->model_mem1->getUniqueIdLogTable();
             echo "$s";
         } else {
@@ -137,7 +102,7 @@ class Mem1 extends CI_Controller {
 		$this->load->model('model_mem1');
 		$this->load->model('model_users');
 		$t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t == 1){
+        if ($this->session->userdata('is_logged_in') ){
             $t = $this->input->get('user');
             $s = $this->model_mem1->getIdLogs($t);
             echo "$s";
@@ -150,7 +115,7 @@ class Mem1 extends CI_Controller {
 		$this->load->model('model_mem1');
 		$this->load->model('model_users');
 		$t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t == 1){
+        if ($this->session->userdata('is_logged_in') ){
             $s = $this->model_mem1->getUniqueCompLogTable();
             echo "$s";
         } else {
@@ -162,7 +127,7 @@ class Mem1 extends CI_Controller {
 		$this->load->model('model_mem1');
 		$this->load->model('model_users');
 		$t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t == 1){
+        if ($this->session->userdata('is_logged_in') ){
             $t = $this->input->get('comp_id');
             $s = $this->model_mem1->getCompLogs($t);
             echo "$s";
@@ -175,7 +140,7 @@ class Mem1 extends CI_Controller {
 		$this->load->model('model_mem1');
 		$this->load->model('model_users');
 		$t = $this->model_users->getType($this->session->userdata('username'));
-		if ($this->session->userdata('is_logged_in') && $t == 1){
+		if ($this->session->userdata('is_logged_in') ){
 			$s = $this->model_mem1->getUniqueDateLogtable();
 			echo "$s";
         } else {
@@ -187,7 +152,7 @@ class Mem1 extends CI_Controller {
 		$this->load->model('model_mem1');
 		$this->load->model('model_users');
 		$t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t == 1){
+        if ($this->session->userdata('is_logged_in') ){
             $t = $this->input->get('dateS');
             $s = $this->model_mem1->getDateLogs($t);
             echo "$s";
@@ -200,7 +165,7 @@ class Mem1 extends CI_Controller {
         $this->load->model('model_mem1');
         $this->load->model('model_users');
         $t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t == 1){
+        if ($this->session->userdata('is_logged_in') ){
             //$u = $this->session->userdata('username');
             $s = $this->model_mem1->getAllUsage();
             echo "$s";
@@ -213,7 +178,7 @@ class Mem1 extends CI_Controller {
 		$this->load->model('model_mem1');
 		$this->load->model('model_users');
 		$t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t == 1){
+        if ($this->session->userdata('is_logged_in')){
             $s = $this->model_mem1->getUniqueIdLogTable2();
             echo "$s";
         } else {
@@ -225,7 +190,7 @@ class Mem1 extends CI_Controller {
         $this->load->model('model_mem1');
         $this->load->model('model_users');
         $t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t == 1){
+        if ($this->session->userdata('is_logged_in') ){
             $s = $this->model_mem1->getWebLogTable();
             echo "$s";
         } else {
@@ -237,7 +202,7 @@ class Mem1 extends CI_Controller {
 		$this->load->model('model_mem1');
 		$this->load->model('model_users');
 		$t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t == 1){
+        if ($this->session->userdata('is_logged_in') ){
             $t = $this->input->get('user');
             $s = $this->model_mem1->getIdLogs2($t);
             echo "$s";
@@ -250,7 +215,7 @@ class Mem1 extends CI_Controller {
 		$this->load->model('model_mem1');
 		$this->load->model('model_users');
 		$t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t == 1){
+        if ($this->session->userdata('is_logged_in') ){
             $u = $this->input->post('user');
             $d = $this->input->post('date');
             $t = $this->input->post('time');
@@ -266,7 +231,7 @@ class Mem1 extends CI_Controller {
 		$this->load->model('model_mem1');
 		$this->load->model('model_users');
 		$t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t == 1){
+        if ($this->session->userdata('is_logged_in') ){
             $u = $this->input->post('user');
             $p = $this->input->post('password');
             $t = $this->input->post('type');
@@ -281,7 +246,7 @@ class Mem1 extends CI_Controller {
 		$this->load->model('model_mem1');
 		$this->load->model('model_users');
 		$t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t == 1){
+        if ($this->session->userdata('is_logged_in') ){
             $u = $this->input->post('user');
             $s = $this->model_mem1->deleteUser($u);
             echo "$s";
@@ -294,7 +259,7 @@ class Mem1 extends CI_Controller {
 		$this->load->model('model_mem1');
 		$this->load->model('model_users');
 		$t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t == 1){
+        if ($this->session->userdata('is_logged_in') ){
             $o = $this->input->post('ouser');
             $u = $this->input->post('user');
             $p = $this->input->post('password');
