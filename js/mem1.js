@@ -32,7 +32,6 @@
 			}, "json");
 		});
 
-
 		//dynmically load student ids in options menu
 		$("#view1b1").click(function () {
 			$.get("/prjt/mem1/getUniqueIdLogs", function (data) {
@@ -84,7 +83,6 @@
 			}, "json");
 		});
 
-
 		//dynamically loading the computer IDs for the "select a computer" button
 		$("#view1b2").click(function () {
 			$.get("/prjt/mem1/getUniqueCompLogs", function (data) {
@@ -99,7 +97,6 @@
 				$("#view1d2").html(MenuContent);
 			}, "json");
 		});
-
 
 		//content for the all logged information
 		$("#view1b3").click(function () {
@@ -226,8 +223,6 @@
 			}, "json");
 		});
 
-
-
 		//pie chart
 		$("#view1b5").click(function () {
 			$.get("/prjt/mem1/getAllLogInfo", function (data) {
@@ -293,8 +288,6 @@
 
 		});
 
-
-
 		$("#p1Info").click(function () {
 			$.get("/prjt/mem1/getTable", function (data) {
 				var content = "<h2 class='text-center'>Student " + data.username + " Information</h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Id</th><th>Username(Student Id)</th><th>User Type</th></tr></thead><tbody>";
@@ -304,22 +297,19 @@
 			}, "json");
 		});
 
-
 		$("#log1b2").click(function () {
 			var content = "";
 			$("#log1d1").html(content);
 			$.get("/prjt/mem1/getWebLogTable", function (data) {
 				var i;
-				content = "<h2 class='text-center'>Website Logged Infomation</h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Username</th><th>Logged On</th><th>Logged Off</th></tr></thead><tbody>";
+				content = "<h2 class='text-center'>Application Logs</h2><div class='pre-scrollable tblHeight'><table id='mytable' class='table table-striped table-bordered pre-scrollable'><thead><tr><th>User ID</th><th>Username</th><th>Logged On</th><th>Logged Off</th></tr></thead><tbody>";
 				for (i = 0; i < data.length; i++) {
 					content += '<tr><td>' + data[i].id + '</td><td>' + data[i].username + '</td>' + '<td>' + data[i].start + '</td>' + '<td>' + data[i].end + '</td></tr>';
 				}
-				content += "</tbody></table>";
+				content += "</tbody></table></div>";
 				$("#log1d2").html(content);
 			}, "json");
 		});
-
-
 
 		//jquery get for the Log Table Button
 		$("#p1LogTable").click(function () {
@@ -376,13 +366,26 @@
 			$.get("/prjt/mem1/getUniqueIdLogs2", function (data) {
 				var i, arr = [];
 				arr = orderList(data, "username");
-				MenuContent = "<select id='selStuLog2' class='IDmenu'><option selected ='selected' value ='nothing'>Choose ID</option>";
+				MenuContent = "<div class='col-md-3'><select id='selStuLog2' class=' form-control IDmenu'><option selected ='selected' value ='nothing'>Choose ID</option>";
 				for (i = 0; i < data.length; i++) {
 					//MenuContent += '<option id ='+data[i].username+' value="'+data[i].username+'">' + data[i].username  + "</option>";	
 					MenuContent += '<option id =' + arr[i] + ' value="' + arr[i] + '">' + arr[i] + "</option>";
 				}
-				MenuContent += "</select>";
+				MenuContent += "</select></div>";
 				$("#log1d1").html(MenuContent);
+			}, "json");
+		});
+
+		$("#editRecBtn2").click(function () {
+			var MenuContent = "";
+			$.get("/prjt/mem1/getUniqueIdLogs2", function (data) {
+				var i;
+				MenuContent = "<select id='editUserOrg' name='editUserOrg' class=' form-control IDmenu'><option selected ='selected' value ='nothing'>Choose ID</option>";
+				for (i = 0; i < data.length; i++) {
+					MenuContent += '<option id ='+data[i].username+' value="'+data[i].username+'">' + data[i].username  + "</option>";	
+				}
+				MenuContent += "</select>";
+				$("#userIds").html(MenuContent);
 			}, "json");
 		});
 
@@ -393,17 +396,16 @@
 				user: user
 			}, function (data) {
 				var i;
-				var content = "<h2 class='text-center'>Logs</h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Log ID</th><th>Log Start Time</th><th>Log End Time</th></tr></thead><tbody>";
+				var content = "<h2 class='text-center'>Logs</h2><div class='tblHeight pre-scrollable'><table id='mytable' class='table table-striped table-bordered '><thead><tr><th>Log ID</th><th>Log Start Time</th><th>Log End Time</th></tr></thead><tbody>";
 				for (i = 0; i < data.length; i++) {
 					if (data[i].username === user) {
 						content += '<tr><td>' + data[i].id + '</td>' + '<td>' + data[i].start + '</td>' + '<td>' + data[i].end + '</td></tr>';
 					}
 				}
-				content += "</tbody></table>";
+				content += "</tbody></table></div>";
 				$("#log1d2").html(content);
 			}, "json");
 		});
-
 
 		$("#addb1").click(function () {
 			$("#sec3").show();
@@ -480,7 +482,6 @@
 			return false;
 
 		});
-
 
 		$(document).on("submit", "#addUserForm", function () {
 			var user = $("#addUserUser").val();
