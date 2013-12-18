@@ -600,10 +600,12 @@
 		$("#editRecBtn2").click(function () {
 			var MenuContent = "";
 			$.get("/prjt/admin_con/getUniqueUsers", function (data) {
-				var i;
+				var i,arr = [];
+                arr = orderList(data, "username");
 				MenuContent = "<select id='editUserOrg' name='editUserOrg' class=' form-control IDmenu'><option selected ='selected' value ='nothing'>Choose ID</option>";
 				for (i = 0; i < data.length; i++) {
-					MenuContent += '<option id ='+data[i].username+' value="'+data[i].username+'">' + data[i].username  + "</option>";	
+					MenuContent += '<option id =' + arr[i] + ' value="' + arr[i] + '">' + arr[i] + "</option>";
+                    //MenuContent += '<option id ='+data[i].username+' value="'+data[i].username+'">' + data[i].username  + "</option>";	
 				}
 				MenuContent += "</select>";
 				$("#userIds").html(MenuContent);
@@ -613,10 +615,12 @@
 			$("#deleteRecBtn2").click(function () {
 			var MenuContent = "";
 			$.get("/prjt/admin_con/getUniqueUsers", function (data) {
-				var i;
+				var i,arr = [];
+                arr = orderList(data, "username");
 				MenuContent = "<select id='deleteUser' name='editUserOrg' class='form-control IDmenu'><option selected ='selected' value ='nothing'>Choose ID</option>";
 				for (i = 0; i < data.length; i++) {
-					MenuContent += '<option id ='+data[i].username+' value="'+data[i].username+'">' + data[i].username  + "</option>";	
+					MenuContent += '<option id =' + arr[i] + ' value="' + arr[i] + '">' + arr[i] + "</option>";
+                    //MenuContent += '<option id ='+data[i].username+' value="'+data[i].username+'">' + data[i].username  + "</option>";	
 				}
 				MenuContent += "</select>";
 				$("#userIds2").html(MenuContent);
