@@ -1,83 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.0.4.1
--- http://www.phpmyadmin.net
---
--- Host: 127.0.0.1
--- Generation Time: Dec 15, 2013 at 10:24 PM
--- Server version: 5.5.32
--- PHP Version: 5.4.19
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- Database: `project`
---
-CREATE DATABASE IF NOT EXISTS `project` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `project`;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `log`
---
-
-CREATE TABLE IF NOT EXISTS `log` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) NOT NULL,
-  `start` varchar(255) NOT NULL,
-  `end` varchar(255) DEFAULT NULL,
-  `action` text,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
-
---
--- Dumping data for table `log`
---
-
-INSERT INTO `log` (`id`, `username`, `start`, `end`, `action`) VALUES
-(5, 'me', '6/12/2013-9:54:22', '6/12/2013-9:54:24', ''),
-(6, '868', '6/12/2013-9:54:42', '6/12/2013-9:54:43', ''),
-(7, '101', '6/12/2013-9:58:20', '6/12/2013-9:58:22', ''),
-(8, 'me2', '6/12/2013-9:59:27', '6/12/2013-10:6:21', ''),
-(9, 'me2', '6/12/2013-21:45:39', '6/12/2013-21:45:46', ''),
-(10, 'me', '6/12/2013-21:45:53', '6/12/2013-21:46:1', ''),
-(11, '101', '6/12/2013-21:46:5', '6/12/2013-21:47:3', ''),
-(12, 'me', '6/12/2013-21:53:38', '6/12/2013-21:58:32', ''),
-(13, 'me', '6/12/2013-21:58:39', '6/12/2013-22:0:20', ''),
-(14, 'me', '12/12/2013-1:13:50', '12/12/2013-1:14:30', ''),
-(15, 'me2', '12/12/2013-1:14:34', NULL, ''),
-(16, 'me2', '12/12/2013-1:14:45', '12/12/2013-1:19:21', ''),
-(17, 'me', '12/12/2013-1:19:26', NULL, ''),
-(18, 'me2', '12/12/2013-1:22:20', NULL, ''),
-(19, 'me2', '12/12/2013-13:21:3', '12/12/2013-13:22:38', ''),
-(20, '800', '13/12/2013-22:7:4', '13/12/2013-22:7:51', ''),
-(21, '800', '15/12/2013-17:48:36', NULL, '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `usage`
---
-
-CREATE TABLE IF NOT EXISTS `usage` (
-  `id` int(3) NOT NULL DEFAULT '0',
-  `username` varchar(3) DEFAULT NULL,
-  `date` varchar(10) DEFAULT NULL,
-  `time` int(3) DEFAULT NULL,
-  `comp_id` int(2) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `usage`
---
 
 INSERT INTO `usage` (`id`, `username`, `date`, `time`, `comp_id`) VALUES
 (1, '800', '10-04-2013', 30, 5),
@@ -277,20 +197,20 @@ INSERT INTO `usage` (`id`, `username`, `date`, `time`, `comp_id`) VALUES
 (195, '808', '18-12-2013', 131, 6),
 (196, '804', '19-12-2013', 15, 7),
 (197, '805', '19-12-2013', 66, 10),
-(198, '810', '19-12-2013', 74, 10),
-(199, '803', '19-12-2013', 61, 5),
-(200, '800', '19-12-2013', 14, 2),
-(201, '805', '19-12-2013', 24, 8),
-(202, '802', '19-12-2013', 17, 6),
-(203, '801', '19-12-2013', 38, 9),
-(204, '806', '19-12-2013', 44, 1),
-(205, '804', '19-12-2013', 34, 2),
-(206, '805', '19-12-2013', 142, 7),
-(207, '808', '19-12-2013', 26, 8),
-(208, '809', '19-12-2013', 46, 7),
-(209, '803', '19-12-2013', 37, 4),
-(210, '800', '19-12-2013', 125, 4),
-(211, '807', '19-12-2013', 10, 3),
+(NULL, '868', '19-12-2013', 74, 10),
+(NULL, '800', '19-12-2013', 61, 5),
+(NULL, '800', '19-12-2013', 14, 2),
+(NULL, '800', '19-12-2013', 24, 8),
+(NULL, '868', '19-12-2013', 17, 6),
+(NULL, '800', '19-12-2013', 38, 9),
+(NULL, '800', '19-12-2013', 44, 1),
+(NULL, '808', '19-12-2013', 34, 2),
+(NULL, '800', '19-12-2013', 142, 7),
+(NULL, '800', '19-12-2013', 26, 8),
+(NULL, '886', '19-12-2013', 46, 7),
+(NULL, 'me', '19-12-2013', 37, 4),
+(NULL, 'me', '19-12-2013', 125, 4),
+(NULL, 'me', '19-12-2013', 10, 3),
 (212, '808', '19-12-2013', 173, 8),
 (213, '807', '19-12-2013', 60, 8),
 (214, '802', '19-12-2013', 43, 10),
@@ -305,9 +225,9 @@ INSERT INTO `usage` (`id`, `username`, `date`, `time`, `comp_id`) VALUES
 (223, '801', '19-12-2013', 26, 8),
 (224, '800', '19-12-2013', 11, 4),
 (225, '804', '19-12-2013', 56, 5),
-(226, '804', '20-12-2013', 47, 10),
-(227, '800', '20-12-2013', 97, 4),
-(228, '803', '20-12-2013', 98, 2),
+(NULL, '804', '20-12-2013', 47, 10),
+(NULL, '800', '20-12-2013', 97, 4),
+(NULL, '803', '20-12-2013', 98, 2),
 (229, '810', '20-12-2013', 16, 2),
 (230, '802', '20-12-2013', 52, 2),
 (231, '809', '20-12-2013', 8, 1),
@@ -355,88 +275,3 @@ INSERT INTO `usage` (`id`, `username`, `date`, `time`, `comp_id`) VALUES
 (273, '801', '20-12-2013', 11, 8),
 (274, '803', '20-12-2013', 103, 5),
 (275, '807', '20-12-2013', 112, 10);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `usage1`
---
-
-CREATE TABLE IF NOT EXISTS `usage1` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) NOT NULL,
-  `date` varchar(255) NOT NULL,
-  `time` int(11) NOT NULL,
-  `comp_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
-
---
--- Dumping data for table `usage1`
---
-
-INSERT INTO `usage1` (`id`, `username`, `date`, `time`, `comp_id`) VALUES
-(1, '868', '25-10-2013', 30, 1),
-(3, '868', '10-09-2013', 15, 4),
-(4, '800', '20-08-2013', 25, 2),
-(5, '800', '25-05-2013', 10, 2),
-(6, '800', '10-04-2013', 40, 5),
-(7, '101', '01-12-2013', 20, 3),
-(8, '101', '01-12-2013', 35, 4),
-(9, '101', '29-11-2013', 20, 1),
-(10, '800', '06-12-2013', 34, 5),
-(11, '868', '06-12-2013', 56, 6),
-(12, '800', '03-12-2013', 12, 7),
-(13, '868', '03-12-2013', 32, 5),
-(14, '801', '03-12-2013', 45, 2),
-(15, '800', '11-12-2013', 12, 7),
-(16, 'me', '11-12-2013', 87, 4),
-(17, 'me2', '11-12-2013', 45, 9),
-(18, 'me2', '12-12-2013', 12, 4);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(5) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `type` int(2) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `username`, `password`, `type`) VALUES
-(1, 'me', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 2),
-(2, 'me2', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1),
-(3, '101', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 2),
-(4, '102', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 2),
-(5, '103', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 2),
-(6, '200', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 3),
-(7, '201', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 3),
-(8, '202', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 3),
-(9, '203', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 3),
-(10, '204', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 3),
-(11, '800', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 4),
-(12, '801', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 4),
-(13, '802', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 4),
-(14, '803', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 4),
-(15, '804', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 4),
-(16, '805', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 4),
-(17, '806', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 4),
-(18, '807', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 4),
-(19, '808', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 4),
-(20, '809', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 4),
-(21, '810', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 4),
-(22, '868', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 4);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

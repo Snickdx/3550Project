@@ -40,7 +40,6 @@
 					<li><a class="btn btn-default btn-lg " id="suprb3" href="#ulogs" data-toggle="tab">Usage Logs</a></li><br>
 					<li><a class="btn btn-default btn-lg " href="#uquery" data-toggle="tab">Usage Query</a></li><br>
 					<li><a class="btn btn-default btn-lg " href="#uview" data-toggle="tab">Usage Overview</a></li><br>
-					<li><a class="btn btn-default btn-lg " href="#userstbl" data-toggle="tab">Users Table</a></li><br>
 				</ul>
 				
 				<div class="tab-content col-md-10 col-xs-offset-1">

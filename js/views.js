@@ -21,13 +21,13 @@
 				dateS: dateS
 			}, function (data) {
 				var i;
-				var content = "<h2 class='text-center'> Log for " + dateS + "</h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Username</th><th>Comp ID</th><th>Session Time(min)</th></tr></thead><tbody>";
+				var content = "<h2 class='text-center'> Log for " + dateS + "</h2><div class='pre-scrollable tblHeight'><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Username</th><th>Comp ID</th><th>Session Time(min)</th></tr></thead><tbody>";
 				for (i = 0; i < data.length; i++) {
 					if (data[i].date === dateS) {
 						content += '<tr><td>' + data[i].username + '</td>' + '<td>' + data[i].comp_id + '</td>' + '<td>' + data[i].time + '</td></tr>';
 					}
 				}
-				content += "</tbody></table>";
+				content += "</tbody></table></div>";
 				$("#view1d2").html(content);
 			}, "json");
 		});
@@ -54,13 +54,13 @@
 				user: user
 			}, function (data) {
 				var i;
-				var content = "<h2 class='text-center'>Students </h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Date</th><th>Computer ID</th><th>Session Time(min)</th></tr></thead><tbody>";
+				var content = "<h2 class='text-center'>Students </h2><div class='pre-scrollable tblHeight'><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Date</th><th>Computer ID</th><th>Session Time(min)</th></tr></thead><tbody>";
 				for (i = 0; i < data.length; i++) {
 					if (data[i].username === user) {
 						content += '<tr><td>' + data[i].date + '</td>' + '<td>' + data[i].comp_id + '</td>' + '<td>' + data[i].time + '</td></tr>';
 					}
 				}
-				content += "</tbody></table>";
+				content += "</tbody></table></div>";
 				$("#view1d2").html(content);
 			}, "json");
 		});
@@ -72,13 +72,13 @@
 				comp_id: comp
 			}, function (data) {
 				var i;
-				var content = "<h2 class='text-center'>Computer</h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Date</th><th>User logged in</th><th>Session Time(min)</th></tr></thead><tbody>";
+				var content = "<h2 class='text-center'>Computer</h2><div class='pre-scrollable tblHeight'><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Date</th><th>User logged in</th><th>Session Time(min)</th></tr></thead><tbody>";
 				for (i = 0; i < data.length; i++) {
 					if (data[i].comp_id === comp) {
 						content += '<tr><td>' + data[i].date + '</td>' + '<td>' + data[i].username + '</td>' + '<td>' + data[i].time + '</td></tr>';
 					}
 				}
-				content += "</tbody></table>";
+				content += "</tbody></table></div>";
 				$("#view1d2").html(content);
 			}, "json");
 		});
@@ -118,15 +118,15 @@
         
         $("#userstbl").click(function () {
 			var content = "";
-			$("#view1d1").html(content);
-			$.get("/prjt/admin_con/getUsersTbl", function (data) {console.log("as");
+			$("#view1d5").html(content);
+			$.get("/prjt/admin_con/getUsersTbl", function (data) {
 				var i;
 				var content = "<h2 class='text-center'>Users Table </h2><div class='pre-scrollable tblHeight'><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Username</th><th>Computer Id</th></tr></thead><tbody>";
 				for (i = 0; i < data.length; i++) {
 					content += '<tr><td>' + data[i].username + '</td>' + '<td>' + data[i].type + '</td></tr>';
 				}
 				content += "</tbody></table></div>";
-				$("#view1d1").html(content);
+				$("#view1d5").html(content);
 			}, "json");
 
 
@@ -262,13 +262,13 @@
             var today = getTodaysDate();
             $.get("/prjt/superv_con/getTodayLogTable",{user:user,today:today},function(data){
                 var i;
-                var content = "<h2 class='text-center'>Student " + user + " Log for Today</h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Date</th><th>Computer ID</th><th>Session Time(min)</th></tr></thead><tbody>";
+                var content = "<h2 class='text-center'>Student " + user + " Log for Today</h2><div class='pre-scrollable tblHeight'><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Date</th><th>Computer ID</th><th>Session Time(min)</th></tr></thead><tbody>";
                 for(i= 0; i < data.length; i++){
 					if(data[i].username === user){
 						content += '<tr><td>' + data[i].date  + '</td>' + '<td>' + data[i].comp_id  + '</td>' + '<td>' + data[i].time + '</td></tr>';
 					}
 				}
-                content += "</tbody></table>";
+                content += "</tbody></table></div>";
                 $("#view1d2").html(content);
             },"json");
 		});
@@ -280,13 +280,13 @@
             var today = getTodaysDate();
             $.get("/prjt/superv_con/getTodayCompLogTable",{comp:comp,today:today},function(data){
                 var i;
-                var content = "<h2 class='text-center'>Computer " + comp + " Log for Today </h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Date</th><th>User logged in</th><th>Session Time(min)</th></tr></thead><tbody>";
+                var content = "<h2 class='text-center'>Computer " + comp + " Log for Today </h2><div class='pre-scrollable tblHeight'><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Date</th><th>User logged in</th><th>Session Time(min)</th></tr></thead><tbody>";
                 for(i= 0; i < data.length; i++){
 					if(data[i].comp_id === comp){
 						content += '<tr><td>' + data[i].date  + '</td>' + '<td>' + data[i].username  + '</td>' + '<td>' + data[i].time + '</td></tr>';
 					}
 				}
-                content += "</tbody></table>";
+                content += "</tbody></table></div>";
                 $("#view1d2").html(content);
             },"json");
 		});
@@ -315,11 +315,11 @@
 			var today= getTodaysDate();
 			$.get("/prjt/superv_con/getAllDailyTable",{today:today},function(data){
                 var i;
-                var content = "<h2 class='text-center'>Date Log: " + data[0].date + " </h2><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Username</th><th>Computer Id</th><th>Session Time(min)</th></tr></thead><tbody>";
+                var content = "<h2 class='text-center'>Date Log: " + data[0].date + " </h2><div class='pre-scrollable tblHeight'><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Username</th><th>Computer Id</th><th>Session Time(min)</th></tr></thead><tbody>";
                 for(i= 0; i < data.length; i++){
                     content += '<tr><td>' + data[i].username + '</td>' + '<td>' + data[i].comp_id  + '</td>' + '<td>' + data[i].time + '</td></tr>';
                 }
-                content += "</tbody></table>";
+                content += "</tbody></table></div>";
                 $("#view1d1").html(content);
             },"json");
 		
@@ -553,11 +553,11 @@
 		$("#p1LogTable").click(function () {
 			$.get("/prjt/student_con/getLogTable", function (data) {
 				var i;
-				var content = "<h2 class='text-center'>Student " + data[0].username + " Log</h2><table id='mytable' class='table table-striped table-bordered pre-scrollable'><thead><tr><th>Date</th><th>Computer Id</th><th>Session Time(min)</th></tr></thead><tbody>";
+				var content = "<h2 class='text-center'>" + data[0].username + " Log</h2><div class='pre-scrollable tblHeight'><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Date</th><th>Computer Id</th><th>Session Time(min)</th></tr></thead><tbody>";
 				for (i = 0; i < data.length; i++) {
 					content += '<tr><td>' + data[i].date + '</td>' + '<td>' + data[i].comp_id + '</td>' + '<td>' + data[i].time + '</td></tr>';
 				}
-				content += "</tbody></table>";
+				content += "</tbody></table></div>";
 				$("#dispInfo").html(content);
 			}, "json");
 		});

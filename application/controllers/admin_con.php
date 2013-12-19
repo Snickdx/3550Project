@@ -39,7 +39,7 @@ class Admin_con extends CI_Controller {
         $this->load->model('model_admin');
 		$this->load->model('model_users');
 		$t = $this->model_users->getType($this->session->userdata('username'));
-        if ($this->session->userdata('is_logged_in') && $t == 1){
+        if ($this->session->userdata('is_logged_in') && $t >= 1 ){
             $s = $this->model_admin->getUsersTbl();
             echo "$s";
         } else {
