@@ -14,6 +14,17 @@ class Model_admin extends CI_Model{
 			return false;
 		}
 	}
+    
+    public function getUsersTbl(){
+		$query = $this->db->get('users');
+		if($query->num_rows() > 0){
+			return json_encode($query->result());
+		}
+		else{
+			return ;
+			}
+	
+	}
 
     
     public function addUsageTable($u,$d,$t,$c){        

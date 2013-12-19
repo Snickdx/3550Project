@@ -104,9 +104,26 @@
 			$("#view1d1").html(content);
 			$.get("/prjt/manager_con/getAllLogInfo", function (data) {
 				var i;
-				var content = "<h2 class='text-center'>Date Log: " + data[0].date + " </h2><div class='pre-scrollable tblHeight'><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Username</th><th>Computer Id</th><th>Session Time(min)</th></tr></thead><tbody>";
+				var content = "<h2 class='text-center'>Logs </h2><div class='pre-scrollable tblHeight'><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Username</th><th>Computer Id</th><th>Session Time(min)</th></tr></thead><tbody>";
 				for (i = 0; i < data.length; i++) {
 					content += '<tr><td>' + data[i].username + '</td>' + '<td>' + data[i].comp_id + '</td>' + '<td>' + data[i].time + '</td></tr>';
+				}
+				content += "</tbody></table></div>";
+				$("#view1d1").html(content);
+			}, "json");
+
+
+
+		});
+        
+        $("#userstbl").click(function () {
+			var content = "";
+			$("#view1d1").html(content);
+			$.get("/prjt/admin_con/getUsersTbl", function (data) {console.log("as");
+				var i;
+				var content = "<h2 class='text-center'>Users Table </h2><div class='pre-scrollable tblHeight'><table id='mytable' class='table table-striped table-bordered'><thead><tr><th>Username</th><th>Computer Id</th></tr></thead><tbody>";
+				for (i = 0; i < data.length; i++) {
+					content += '<tr><td>' + data[i].username + '</td>' + '<td>' + data[i].type + '</td></tr>';
 				}
 				content += "</tbody></table></div>";
 				$("#view1d1").html(content);
@@ -665,7 +682,7 @@
 			$.post("/prjt/admin_con/deleteUser", {
 				user: user
 			}, function (data) {
-				$("#deleteResp").html("<br><div class='alert alert-success' style='height:55px;width:175px;'><p>"+data+"</p></div>");
+				$("#deleteResp").html("<br><div class='alert alert-success' style='height:55px;width:175px;'><p>"+data+"</p></div>").delay(2).fadeIn(3000).delay(2000).fadeOut(300);
 				return false;
 			});
             return false;
@@ -674,7 +691,7 @@
 		$(document).on("submit","#editUserForm",function () {
 			var ouser = $("#editUserOrg").val();
             if(ouser === "nothing") {
-                $("#editResponse").html("<br><div class='alert alert-danger' style='height:55px;width:175px;'><p>ERROR:Enter ID</p></div>");
+                $("#editResponse").html("<br><div class='alert alert-danger' style='height:55px;width:175px;'><p>ERROR:Enter ID</p></div>").delay(2).fadeIn(3000).delay(2000).fadeOut(300);
                 return false;
             }
 			var user = $("#editUserUser").val();
@@ -690,12 +707,12 @@
 					password: password,
 					type: type
 				}, function (data) {
-					$("#editResponse").html("<br><div class='alert alert-success' style='height:55px;width:175px;'><p>"+data+"</p></div>");
+					$("#editResponse").html("<br><div class='alert alert-success' style='height:55px;width:175px;'><p>"+data+"</p></div>").delay(2).fadeIn(3000).delay(2000).fadeOut(300);
 					return false;
 				});
 				return false;
 			} else {
-				$("#editResponse").html("<br><div class='alert alert-danger' style='height:55px;width:175px;'><p>Error</p></div>");
+				$("#editResponse").html("<br><div class='alert alert-danger' style='height:55px;width:175px;'><p>Error</p></div>").delay(2).fadeIn(3000).delay(2000).fadeOut(300);
 				return false;
 			}
 			return false;
@@ -713,14 +730,14 @@
 					time: time,
 					comp: comp
 				}, function (data) {
-					$("#addUsageResponse").html("<br><div class='alert alert-success' style='height:55px;width:175px;'><p>"+data+"</p></div>");
+					$("#addUsageResponse").html("<br><div class='alert alert-success' style='height:55px;width:175px;'><p>"+data+"</p></div>").delay(2).fadeIn(3000).delay(2000).fadeOut(300);
 					$("#addUsageResponse").show();
 					return false;
 				});
 				return false;
 			} else {
                 console.log("as");
-				$("#addUsageResponse").html("<br><div class='alert alert-danger' style='height:55px;width:175px;'><p>ERROR</p></div>");
+				$("#addUsageResponse").html("<br><div class='alert alert-danger' style='height:55px;width:175px;'><p>ERROR</p></div>").delay(2).fadeIn(3000).delay(2000).fadeOut(300);
 				$("#addUsageResponse").show();
 				return false;
 			}
@@ -738,13 +755,13 @@
 					password: password,
 					type: type
 				}, function (data) {
-					$("#addResponse").html("<br><br><div class='alert alert-success' style='height:55px;width:175px;'><p>"+data+"</p></div>");
+					$("#addResponse").html("<br><br><div class='alert alert-success' style='height:55px;width:175px;'><p>"+data+"</p></div>").delay(2).fadeIn(3000).delay(2000).fadeOut(300);
 					$("#addResponse").show();
 					return false;
 				});
 				return false;
 			} else {
-				$("#addResponse").html("<br><br><div class='alert alert-danger' style='height:55px;width:175px;'><p>Error</p></div>");
+				$("#addResponse").html("<br><br><div class='alert alert-danger' style='height:55px;width:175px;'><p>Error</p></div>").delay(2).fadeIn(3000).delay(2000).fadeOut(300);
 				$("#addResponse").show();
 				return false;
 			}
