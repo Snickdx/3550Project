@@ -2,8 +2,8 @@
 </head>
 
 	<div class="col-lg-12 btn btn-primary active">
-			<div class="col-lg-1"><a class="btn btn-primary btn-lg" href='<?php echo base_url()."main/logout" ?>'>Logout</a></div>
 			<div class="col-lg-11"><h1>D.A.T.A Administrator</h1></div>
+			<div class="col-lg-1"><br/><a class="btn btn-primary btn-lg" href='<?php echo base_url()."main/logout" ?>'>Logout</a></div>
 		</div>
 
 	<div class="container">
@@ -11,7 +11,7 @@
 		<!--Nav Tabs--><div class="row">
 			<ul class="nav nav-justified nav-tabs">
 				<li><a class="btn btn-primary btn-lg" href="#myinfo" data-toggle="tab">My Information</a></li>
-				<li><a class="btn btn-primary btn-lg " href="#usage" data-toggle="tab">Usage Information</a></li>
+				<li><a class="btn btn-primary btn-lg " href="#usage" data-toggle="tab">General Information</a></li>
 				<li><a class="btn btn-primary btn-lg " href="#database" data-toggle="tab">Database</a></li>
 			</ul>
 		</div>
@@ -41,6 +41,7 @@
 					<li><a class="btn btn-default btn-lg " id="view1b3" href="#ulogs" data-toggle="tab">Usage Logs</a></li><br>
 					<li><a class="btn btn-default btn-lg " href="#uquery" data-toggle="tab">Usage Query</a></li><br>
 					<li><a class="btn btn-default btn-lg " href="#uview" data-toggle="tab">Usage Overview</a></li><br>
+					<li><a class="btn btn-default btn-lg " href="#userstbl" data-toggle="tab">Users Table</a></li><br>
 				</ul>
 				
 				<div class="tab-content col-md-10 col-xs-offset-1">
@@ -58,6 +59,9 @@
 						<button class="btn btn-default" id="view1b5">Pie Chart of Usage of Computers</button>
 						<br><br>
 						<div id="view1d3" class="col-md-8 col-md-offset-2"></div>
+					</div>
+					<div class="tab-pane stdheight well fade in" id="users">
+						<div id="view1d5" class="col-md-8 col-md-offset-2"></div>
 					</div>
 				</div>
 			</div>
@@ -111,7 +115,7 @@
 										<div class="form-group">
 											<div class=" col-sm-offset-4">
 												<input class="btn btn-default" type="submit" name="submit" value="Add Record"/>
-                                                <div id="addResponse"></div>
+												<div id="addResponse"></div>
 											</div>
 										</div>
 										</form>
@@ -122,7 +126,7 @@
 								<h2>Edit User</h2>
 								<form id="editUserForm" class="form-horizontal">
 									<div class="form-group">
-										<label for="userIds" class="col-xs-3 control-label" >Select User</label>
+										<label for="userIds" class="col-xs-3 control-label">Select User</label>
 										<div id="userIds" class="col-xs-5"></div>
 									</div>
 									<div class="form-group">
@@ -154,12 +158,8 @@
 										</div>
 									</div>
 								</form>
-                                <div class="col-md-4"></div>
-                                <div class="col-md-4"id="editResponse"></div>
-                                <div class="col-md-4"></div>
+								<div class="col-md-4 col-md-offset-4" id="editResponse"></div>
 							</div>
-                            
-                            
 							<div class="sec2" id="deleteRec2">
 								<h2>Delete Record</h2>
 								<form class="form-horizontal">
@@ -169,17 +169,17 @@
 										<input type="submit" class=" col-xs-3 btn btn-default" id="deleteSub" value="Delete"/>
 									</div>
 								</form>
-                                <div class="col-md-4"></div>
-                                <div class="col-md-4"id="deleteResp"></div>
-                                <div class="col-md-4"></div>
+								<div id="deleteResp"class="col-md-4 col-md-offset-4"></div>
 							</div>
 						</div>
 					</div>
 					
 					<div class="tab-pane stdheight well fade in" id="utbl">
 						<button class="btn btn-default" id="addRecBtn" >Add Record</button>
-						<!--<button class="btn btn-default" id="editRecBtn" >Edit Record</button>
-						<button class="btn btn-default" id="deleteRecBtn" >Delete Record</button>-->
+<!--
+						<button class="btn btn-default" id="editRecBtn" >Edit Record</button>
+						<button class="btn btn-default" id="deleteRecBtn" >Delete Record</button>
+-->
 						<div class="sec" id="addRec">
 							<h2>Add Record</h2>
 							<div id="addForm">
@@ -210,15 +210,12 @@
 									</div>
 									<div class="form-group">
 										<div class="col-sm-offset-3 col-xs-5">
-											<input type="submit" class=" btn btn-default" name="addUsageForm" id="addUsageFormq" value="Add Record"/>
+											<input type="submit" class=" btn btn-default" name="addUsageFormq" id="addUsageForm" value="Add Record"/>
 										</div>
 									</div>
 								</form>
-                                <div class="col-md-4"></div>
-                                <div class="col-md-4"id="addUsageResponse"></div>
-                                <div class="col-md-4"></div>
+								<div class="col-md-4 col-md-offset-4"id="addUsageResponse"></div>
 							</div>
-							
 						</div>
 						<div class="sec" id="editRec">
 							<h2>Edit Record</h2>
@@ -230,7 +227,7 @@
 					</div>
 					
 					<div class="tab-pane stdheight well fade in" id="altbl">
-						<button class="btn btn-default" id="log1b1">Select a Student</button>
+						<button class="btn btn-default" id="log1b1">Select a User</button>
 						<button class="btn btn-default" id="log1b2">View All Logged Information</button>
 						<br><br>
 						<div id="log1d1"></div>

@@ -2,8 +2,8 @@
 </head>
 
 	<div class="col-lg-12 btn btn-primary active">
-			<div class="col-lg-1"><a class="btn btn-primary btn-lg" href='<?php echo base_url()."main/logout" ?>'>Logout</a></div>
-			<div class="col-lg-10"><h1>D.A.T.A Supervisor</h1></div>
+			<div class="col-lg-10 col-lg-offset-1"><h1>D.A.T.A Supervisor</h1></div>
+			<div class="col-lg-1"><br/><a class="btn btn-primary btn-lg" href='<?php echo base_url()."main/logout" ?>'>Logout</a></div>
 		</div>
 
 	<div class="container">
@@ -11,7 +11,7 @@
 		<!--Nav Tabs--><div class="row">
 			<ul class="nav nav-justified nav-tabs">
 				<li><a class="btn btn-primary btn-lg" href="#myinfo" data-toggle="tab">My Information</a></li>
-				<li><a class="btn btn-primary btn-lg " href="#usage" data-toggle="tab">Usage Information</a></li>
+				<li><a class="btn btn-primary btn-lg " href="#usage" data-toggle="tab">General Information</a></li>
 			</ul>
 		</div>
 		
@@ -40,6 +40,7 @@
 					<li><a class="btn btn-default btn-lg " id="suprb3" href="#ulogs" data-toggle="tab">Usage Logs</a></li><br>
 					<li><a class="btn btn-default btn-lg " href="#uquery" data-toggle="tab">Usage Query</a></li><br>
 					<li><a class="btn btn-default btn-lg " href="#uview" data-toggle="tab">Usage Overview</a></li><br>
+					<li><a class="btn btn-default btn-lg " href="#userstbl" data-toggle="tab">Users Table</a></li><br>
 				</ul>
 				
 				<div class="tab-content col-md-10 col-xs-offset-1">
@@ -56,6 +57,9 @@
 						<button class="btn btn-default" id="suprb5">Pie Chart of Usage of Computers</button>
 						<br><br>
 						<div id="view1d3" class="col-md-8 col-md-offset-2"></div>
+					</div>
+					<div class="tab-pane stdheight well fade in" id="users">
+						<div id="view1d5" class="col-md-8 col-md-offset-2"></div>
 					</div>
 				</div>
 			</div>
