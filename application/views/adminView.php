@@ -1,10 +1,10 @@
 <title>D.A.T.A Administor</title>
 </head>
 
-	<div class="col-lg-12 btn btn-primary active">
+	<div class="container col-lg-12 well"  style="height: 10%">
 			<div class="col-lg-11"><h1>D.A.T.A Administrator</h1></div>
 			<div class="col-lg-1"><br/><a class="btn btn-primary btn-lg" href='<?php echo base_url()."main/logout" ?>'>Logout</a></div>
-		</div>
+	</div>
 
 	<div class="container">
 		<br>

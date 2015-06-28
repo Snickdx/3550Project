@@ -1,7 +1,7 @@
 <title>D.A.T.A Supervisor</title>
 </head>
 
-	<div class="col-lg-12 btn btn-primary active">
+	<div class="container col-lg-12 well">
 			<div class="col-lg-10 col-lg-offset-1"><h1>D.A.T.A Supervisor</h1></div>
 			<div class="col-lg-1"><br/><a class="btn btn-primary btn-lg" href='<?php echo base_url()."main/logout" ?>'>Logout</a></div>
 		</div>

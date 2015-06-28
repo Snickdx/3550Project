@@ -1,7 +1,7 @@
 <title>D.A.T.A Manager</title>
 </head>
 
-	<div class="col-lg-12 btn btn-primary active">
+	<div class="container col-lg-12 well">
 			<div class="col-lg-8 col-lg-offset-2"><h1>D.A.T.A Manager</h1></div>
 			<div class="col-lg-1"><a class="btn btn-primary btn-lg" href='<?php echo base_url()."main/logout" ?>'>Logout</a></div>
 		</div>
